@@ -1,6 +1,12 @@
 #ifndef FORMULA_H_INCLUDED
 #define FORMULA_H_INCLUDED
 
+#define MAX_PILOTOS     48
+#define MAX_ESCUDERIAS  24
+#define MAX_PISTAS      30
+#define MAX_CARRERAS    35
+#define MAX_PODIO       3
+
 // =====================
 //   TIPOS Y ESTRUCTURAS
 // =====================
