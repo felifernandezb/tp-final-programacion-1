@@ -10,8 +10,9 @@
 int registrarPiloto(stPiloto pilotos[], int *cant, stPiloto nuevo);
 int modificarPiloto(stPiloto pilotos[], int cant, int id, stPiloto actualizado);
 int eliminarPiloto(stPiloto pilotos[], int *cant, int id);
-void listarPilotos(stPiloto pilotos[], int cant);
+void listarPilotos(stPiloto pilotos[], int cant, stEscuderia escuderias[], int cantEscuderias);
 int buscarPilotoPorId(stPiloto pilotos[], int cant, int id);
+int generarIdPiloto(stPiloto pilotos[], int cant)
 
 void ordenarPilotosAlfabeticamente(stPiloto pilotos[], int cant, stPiloto resultado[]);
 
@@ -22,14 +23,18 @@ void cargarPilotos(stPiloto pilotos[], int *cant);
 //   ESCUDERIAS
 // ========================
 
-int registrarEscuderia(stEscuderia escuderias[], int *cant, stEscuderia nueva, stPiloto pilotos[], int cantPilotos);
+int registrarEscuderia(stEscuderia escuderias[], int *cant, stEscuderia nueva);
 int modificarEscuderia(stEscuderia escuderias[], int cant, int id, stEscuderia actualizada, stPiloto pilotos[], int cantPilotos);
-int eliminarEscuderia(stEscuderia escuderias[], int *cant, int id);
-void listarEscuderias(stEscuderia escuderias[], int cant);
+int eliminarEscuderia(stEscuderia escuderias[], int *cant, int id, stPiloto pilotos[], int *cantPilotos);
+void listarEscuderias(stEscuderia escuderias[], int cant, stPiloto pilotos[], int cantPilotos);
 int buscarEscuderiaPorId(stEscuderia escuderias[], int cant, int id);
 
 void guardarEscuderias(stEscuderia escuderias[], int cant);
 void cargarEscuderias(stEscuderia escuderias[], int *cant);
+
+int hayEscuderiaDisponible(stEscuderia escuderias[], int cant);
+void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant);
+void ordenarEscuderiasAlfabeticamente(stEscuderia escuderias[], int cant, stEscuderia resultado[]);
 
 
 
