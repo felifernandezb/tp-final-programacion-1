@@ -101,13 +101,17 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
 
     for (int i = 0; i < cant; i++)
     {
-        int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, pilotos[i].idEscuderia);
+        int posPista = buscarPistaPorId(pista, cantPistas, carrera[i].idPista);
 
-        printf("%-6d %-30s %-20s %-10d %-10s\n %-10s",
-            pilotos[i].id,
-            pilotos[i].nombre,
-            escuderias[posEsc].marca,
-            pilotos[i].puntaje,
-            pilotos[i].categoria == 1 ? "F1" : "F2");
+        char fecha[15];
+        sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
+
+        printf("%-6d %-15s %-20s %-10d %-10d %-10d\n",
+        carrera[i].id,
+        fecha,
+        pista[posPista].nombre,
+        carrera[i].podio[0],
+        carrera[i].podio[1],
+        carrera[i].podio[2]);
     }
 }
