@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 
-int buscarPistaPorId (stPista pistas[], int cantidad, int id)
+int buscarPistaPorId (stPista pistas[], int cant, int id)
 {
-    for (int i = 0; i < cantidad; i++)
+    for (int i = 0; i < cant; i++)
     {
         if (id == pistas[i].id)
         {
@@ -15,11 +15,11 @@ int buscarPistaPorId (stPista pistas[], int cantidad, int id)
     return -1;
 }
 
-int generarIDPista (stPista pistas[], int cantidad)
+int generarIDPista (stPista pistas[], int cant)
 {
     int maxId = 0;
 
-    for (int i = 0; i < cantidad; i++)
+    for (int i = 0; i < cant; i++)
     {
         if (pistas[i].id > maxId)
         {
@@ -30,17 +30,133 @@ int generarIDPista (stPista pistas[], int cantidad)
     return maxId + 1;
 }
 
-int registrarPista (stPista pistas[], int *cantidad, stPista nuevo)
+int registrarPista (stPista pistas[], int *cant, stPista nuevo)
 {
-    if (*cantidad >= MAX_PISTAS)
+    if (*cant >= MAX_PISTAS)
     {
         return 0;
     }
 
-    pistas[*cantidad] = nuevo;
-    (*cantidad)++;
+    pistas[*cant] = nuevo;
+    (*cant)++;
 
-    guardarPista(pistas, *cantidad);
+    guardarPista(pistas, *cant);
 
     return 1;
+}
+
+int modificarPista (stPista pistas[], int cant, int id, stPista nuevaPista)
+{
+    int pos = buscarPistaPorId(pistas, cant, id);
+
+    if (pos == -1)
+    {
+        return 0;
+    }
+
+    nuevaPista.id = id;
+    pistas[pos] = nuevaPista;
+
+    guardarPista(pistas, cant);
+
+    return 1;
+}
+
+int eliminarPista (stPista pistas[], int *cant, int idPistaABorrar)
+{
+    int pos = buscarPistaPorId(pistas, *cant, idPistaABorrar);
+
+    if (pos == -1)
+    {
+        return 0;
+    }
+
+    for (int i = pos; i < *cant - 1; i++)
+    {
+        pistas[i] = pistas[i+1];
+    }
+
+    (*cant)--;
+
+    guardarPista(pistas, *cant);
+
+    return 1;
+}
+
+void guardarPista (stPista pistas[], int cant)
+{
+    FILE *archi = fopen("pistas.dat", "wb");
+
+    if (archi == 0)
+    {
+        printf("El archivo no se pudo abrir.");
+        return;
+    }
+
+    fwrite(&cant, sizeof(int), 1, archi);
+
+    for (int i = 0; i < cant; i++)
+    {
+        fwrite(&pistas[i], sizeof(stPista), 1, archi);
+    }
+
+    fclose(archi);
+}
+
+void cargarPista (stPista pistas[], int *cant)
+{
+    FILE *archi = fopen("pistas.dat", "rb");
+
+    if (archi == 0)
+    {
+        *cant = 0;
+        return;
+    }
+
+    fread(cant, sizeof(int), 1, archi);
+
+    for (int i = 0; i < *cant; i++)
+    {
+        fread(&pistas[i], sizeof(stPista), 1, archi);
+    }
+
+    fclose(archi);
+}
+
+void ordenarPistasAlfabeticamente (stPista pistas[], int cant, stPista pistasOrdenadas[])
+{
+    for (int i = 0; i < cant; i++)
+    {
+        pistasOrdenadas[i] = pistas[i];
+    }
+
+    for (int i = 0; i < cant - 1; i++)
+    {
+        for (int j = 0; j < cant - i - 1; j++)
+        {
+            if (strcmp(pistasOrdenadas[j].nombre, pistasOrdenadas[j+1].nombre) > 0)
+            {
+                stPista aux = pistasOrdenadas[j];
+                pistasOrdenadas[j] = pistasOrdenadas[j+1];
+                pistasOrdenadas[j+1] = aux;
+            }
+        }
+    }
+}
+
+void listarPistas (stPista pistas[], int cant)
+{
+    if (cant == 0)
+    {
+        printf("No hay datos guardados.");
+        return;
+    }
+
+    printf("%-5s %-30s %-20s %-10s\n", "ID", "Nombre", "Ubicacion", "Distancia");
+    printf("--------------------------------------------------------------------\n");
+
+    for (int i = 0; i < cant; i++)
+    {
+        printf("%-5d %-30s %-20s %-10f\n", pistas[i].id, pistas[i].nombre, pistas[i].ubicacion, pistas[i].distancia);
+    }
 }
