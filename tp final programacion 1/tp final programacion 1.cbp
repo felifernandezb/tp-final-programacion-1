@@ -31,6 +31,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="formula.h" />
+		<Unit filename="formula_carreras.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="formula_carreras.h" />
+		<Unit filename="formula_pilotos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="formula_pilotos.h" />
+		<Unit filename="formula_pistas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="formula_pistas.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

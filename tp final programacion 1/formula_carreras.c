@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "formula.h"
+#include "formula_carreras.h"
 
 // =================
 // FUNCIONES CARRERAS
@@ -40,10 +41,15 @@ int registrarCarrera(stCarrera carrera[], int *cant, stCarrera nuevo)
         return 0;
     }
 
+    if (hayChoqueFechas(carrera, *cant, nuevo.idPista, nuevo.fecha))
+    {
+        return 0;
+    }
+
     carrera[*cant] = nuevo;
     (*cant)++;
 
-    guardarCarrera(carrera, *cant);
+    guardarCarreras(carrera, *cant);
 
     return 1;
 }
@@ -107,11 +113,142 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
         sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
 
         printf("%-6d %-15s %-20s %-10d %-10d %-10d\n",
-        carrera[i].id,
-        fecha,
-        pista[posPista].nombre,
-        carrera[i].podio[0],
-        carrera[i].podio[1],
-        carrera[i].podio[2]);
+               carrera[i].id,
+               fecha,
+               pista[posPista].nombre,
+               carrera[i].podio[0],
+               carrera[i].podio[1],
+               carrera[i].podio[2]);
     }
 }
+
+void listarCarrerasDePista(stCarrera carrera[], int cant, stPista pista[], int idPista, int cantPistas)
+{
+    if (cant == 0)
+    {
+        printf("No hay carreras registradas.\n");
+        return;
+    }
+
+    printf("%-6s %-30s %-20s %-10s %-10s %-10s\n", "ID", "Fecha", "Pista", "1ro", "2ro", "3ro");
+    printf("--------------------------------------------------------------------\n");
+
+    for (int i = 0; i < cant; i++)
+    {
+        if (carrera[i].idPista == idPista)
+        {
+            int posPista = buscarPistaPorId(pista, cantPistas, carrera[i].idPista);
+
+            char fecha[15];
+            sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
+
+            printf("%-6d %-15s %-20s %-10d %-10d %-10d\n",
+                   carrera[i].id,
+                   fecha,
+                   pista[posPista].nombre,
+                   carrera[i].podio[0],
+                   carrera[i].podio[1],
+                   carrera[i].podio[2]);
+
+
+        }
+    }
+
+}
+
+void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int idPiloto, int cantPistas)
+{
+    if (cant == 0)
+    {
+        printf("No hay carreras registradas.\n");
+        return;
+    }
+
+    printf("%-6s %-30s %-20s %-10s %-10s %-10s\n", "ID", "Fecha", "Pista", "1ro", "2ro", "3ro");
+    printf("--------------------------------------------------------------------\n");
+
+    for (int i = 0; i < cant; i++)
+    {
+        if (carrera[i].podio[0] == idPiloto ||
+                carrera[i].podio[1] == idPiloto ||
+                carrera[i].podio[2] == idPiloto ||
+                carrera[i].vueltaRapida.idPiloto == idPiloto)
+        {
+            int posPista = buscarPistaPorId(pista, cantPistas, carrera[i].idPista);
+
+            char fecha[15];
+            sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
+
+            printf("%-6d %-15s %-20s %-10d %-10d %-10d\n",
+                   carrera[i].id,
+                   fecha,
+                   pista[posPista].nombre,
+                   carrera[i].podio[0],
+                   carrera[i].podio[1],
+                   carrera[i].podio[2]);
+
+            if (carrera[i].vueltaRapida.idPiloto == idPiloto)
+            {
+                printf("  Vuelta rapida: %d:%02d:%03d\n",
+                       carrera[i].vueltaRapida.minutos,
+                       carrera[i].vueltaRapida.segundos,
+                       carrera[i].vueltaRapida.milisegundos);
+            }
+
+
+        }
+    }
+
+}
+
+int hayChoqueFechas(stCarrera carrera[], int cant, int idPista, stFecha fecha)
+{
+    for (int i = 0; i < cant; i++)
+    {
+        if (carrera[i].idPista == idPista &&
+                carrera[i].fecha.dia == fecha.dia &&
+                carrera[i].fecha.mes == fecha.mes &&
+                carrera[i].fecha.anio == fecha.anio)
+        {
+            return 1;
+        }
+
+    }
+
+    return 0;
+
+}
+
+int eliminarCarrera(stCarrera carrera[], int *cant, int id)
+{
+    int pos = buscarCarreraPorId(carrera, *cant, id);
+    if (pos == -1)
+    {
+        return 0;
+    }
+    carrera[pos] = carrera[*cant - 1];
+    (*cant)--;
+    guardarCarreras(carrera, *cant);
+
+    return 1;
+
+}
+
+int modificarCarrera(stCarrera carrera[], int *cant, int id, stCarrera nueva)
+{
+
+    int pos = buscarCarreraPorId(carrera, *cant, id);
+    if (pos == -1)
+    {
+        return 0;
+    }
+    carrera[pos] = nueva;
+    guardarCarreras(carrera, *cant);
+
+    return 1;
+}
+
+
+
+
+
