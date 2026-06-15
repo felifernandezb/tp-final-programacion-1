@@ -2,6 +2,7 @@
 #include <string.h>
 #include "formula.h"
 #include "formula_carreras.h"
+#include "formula_pistas.h"
 
 // =================
 // FUNCIONES CARRERAS
@@ -94,7 +95,7 @@ void cargarCarreras(stCarrera carrera[], int *cant)
     fclose(archivo);
 }
 
-void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPistas)
+void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPistas, stPiloto pilotos[])
 {
     if (cant == 0)
     {
@@ -102,8 +103,8 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
         return;
     }
 
-    printf("%-6s %-30s %-20s %-10s %-10s %-10s\n", "ID", "Fecha", "Pista", "1ro", "2ro", "3ro");
-    printf("--------------------------------------------------------------------\n");
+    printf("%-6s %-20s %-20s %-15s %-15s %-15s\n", "ID", "Fecha", "Pista", "1ro", "2ro", "3ro");
+    printf("-------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < cant; i++)
     {
@@ -112,13 +113,13 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
         char fecha[15];
         sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
 
-        printf("%-6d %-15s %-20s %-10d %-10d %-10d\n",
+        printf("%-6d %-20s %-20s %-15s %-15s %-15s\n",
                carrera[i].id,
                fecha,
                pista[posPista].nombre,
-               carrera[i].podio[0],
-               carrera[i].podio[1],
-               carrera[i].podio[2]);
+               pilotos[0].nombre,
+               pilotos[1].nombre,
+               pilotos[2].nombre);
     }
 }
 

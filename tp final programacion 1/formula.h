@@ -18,16 +18,18 @@ typedef struct {
 } stFecha;
 
 typedef struct {
+    int id;
     char marca[50];
     char sponsor[50];
     int idPiloto1;
     int idPiloto2;
+    int categoria;
 } stEscuderia;
 
 typedef struct {
     int id;
     char nombre[50];
-    stEscuderia escuderia;
+    int idEscuderia;
     int puntaje;
     int categoria;  // 1 = F1, 2 = F2
 } stPiloto;

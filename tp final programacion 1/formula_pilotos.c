@@ -185,23 +185,16 @@ void cargarPilotos(stPiloto pilotos[], int *cant)
 // FUNCIONES ESCUDERIAS
 // ====================
 
-int hayEscuderiaDisponible(stEscuderia escuderias[], int cant)
-{
-    for (int i = 0; i < cant; i++)
-    {
-        if (escuderias[i].idPiloto1 == -1 || escuderias[i].idPiloto2 == -1)
-            return 1;
-    }
-    return 0;
-}
-
-void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant)
+void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categoria)
 {
     printf("%-5s %-30s %-20s %-10s\n", "ID", "Marca", "Sponsor", "Lugares");
     printf("------------------------------------------------------------\n");
 
     for (int i = 0; i < cant; i++)
     {
+        if (escuderias[i].categoria != categoria)
+            continue;
+
         int lugares = 0;
         if (escuderias[i].idPiloto1 == -1) lugares++;
         if (escuderias[i].idPiloto2 == -1) lugares++;
@@ -214,6 +207,55 @@ void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant)
                 escuderias[i].sponsor,
                 lugares);
         }
+    }
+}
+
+int generarIdEscuderia(stEscuderia escuderias[], int cant)
+{
+    int maxId = 0;
+    for (int i = 0; i < cant; i++)
+    {
+        if (escuderias[i].id > maxId)
+            maxId = escuderias[i].id;
+    }
+    return maxId + 1;
+}
+
+int hayEscuderiaDisponible(stEscuderia escuderias[], int cant, int categoria)
+{
+    for (int i = 0; i < cant; i++)
+    {
+        if (escuderias[i].categoria != categoria)
+            continue;
+        if (escuderias[i].idPiloto1 == -1 || escuderias[i].idPiloto2 == -1)
+            return 1;
+    }
+    return 0;
+}
+
+void listarEscuderias(stEscuderia escuderias[], int cant, stPiloto pilotos[], int cantPilotos)
+{
+    if (cant == 0)
+    {
+        printf("No hay escuderias registradas.\n");
+        return;
+    }
+
+    printf("%-5s %-20s %-20s %-10s %-10s\n", "ID", "Marca", "Sponsor", "Categoria", "Lugares");
+    printf("--------------------------------------------------------------------\n");
+
+    for (int i = 0; i < cant; i++)
+    {
+        int lugares = 0;
+        if (escuderias[i].idPiloto1 == -1) lugares++;
+        if (escuderias[i].idPiloto2 == -1) lugares++;
+
+        printf("%-5d %-20s %-20s %-10s %-10d\n",
+            escuderias[i].id,
+            escuderias[i].marca,
+            escuderias[i].sponsor,
+            escuderias[i].categoria == 1 ? "F1" : "F2",
+            lugares);
     }
 }
 
@@ -251,7 +293,7 @@ int registrarEscuderia(stEscuderia escuderias[], int *cant, stEscuderia nueva)
     return 1;
 }
 
-int modificarEscuderia(stEscuderia escuderias[], int cant, int id, stEscuderia actualizada)
+int modificarEscuderia(stEscuderia escuderias[], int cant, int id, stEscuderia actualizada, stPiloto pilotos[], int cantPilotos)
 {
     // Buscar la posición de la escudería
     int pos = buscarEscuderiaPorId(escuderias, cant, id);
@@ -323,35 +365,6 @@ void ordenarEscuderiasAlfabeticamente(stEscuderia escuderias[], int cant, stEscu
                 resultado[j + 1] = temp;
             }
         }
-    }
-}
-
-void listarEscuderias(stEscuderia escuderias[], int cant, stPiloto pilotos[], int cantPilotos)
-{
-    if (cant == 0)
-    {
-        printf("No hay escuderias registradas.\n");
-        return;
-    }
-
-    printf("%-5s %-20s %-20s %-20s %-20s\n", "ID", "Marca", "Sponsor", "Piloto 1", "Piloto 2");
-    printf("--------------------------------------------------------------------\n");
-
-    for (int i = 0; i < cant; i++)
-    {
-        // Buscar nombres de los pilotos
-        int posPiloto1 = buscarPilotoPorId(pilotos, cantPilotos, escuderias[i].idPiloto1);
-        int posPiloto2 = buscarPilotoPorId(pilotos, cantPilotos, escuderias[i].idPiloto2);
-
-        char *nombrePiloto1 = (posPiloto1 != -1) ? pilotos[posPiloto1].nombre : "Vacio";
-        char *nombrePiloto2 = (posPiloto2 != -1) ? pilotos[posPiloto2].nombre : "Vacio";
-
-        printf("%-5d %-20s %-20s %-20s %-20s\n",
-            escuderias[i].id,
-            escuderias[i].marca,
-            escuderias[i].sponsor,
-            nombrePiloto1,
-            nombrePiloto2);
     }
 }
 

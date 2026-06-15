@@ -2,6 +2,7 @@
 #define FORMULA_CARRERAS_H_INCLUDED
 
 #include "formula.h"
+#include "formula_pistas.h"
 
 
 // ========================
@@ -13,7 +14,7 @@ int generarIdCarrera(stCarrera carrera[], int cant);
 int registrarCarrera(stCarrera carrera[], int *cant, stCarrera nuevo);
 void guardarCarreras(stCarrera carrera[], int cant);
 void cargarCarreras(stCarrera carrera[], int *cant);
-void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPistas);
+void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPistas, stPiloto pilotos[]);
 void listarCarrerasDePista(stCarrera carrera[], int cant, stPista pista[], int idPista, int cantPistas);
 void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int idPiloto, int cantPistas);
 int hayChoqueFechas(stCarrera carrera[], int cant, int idPista, stFecha fecha);

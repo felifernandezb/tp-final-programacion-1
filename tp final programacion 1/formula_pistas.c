@@ -152,11 +152,11 @@ void listarPistas (stPista pistas[], int cant)
         return;
     }
 
-    printf("%-5s %-30s %-20s %-10s\n", "ID", "Nombre", "Ubicacion", "Distancia");
-    printf("--------------------------------------------------------------------\n");
+    printf("%-5s %-30s %-30s %-10s\n", "ID", "Nombre", "Ubicacion", "Distancia (k/m)");
+    printf("---------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < cant; i++)
     {
-        printf("%-5d %-30s %-20s %-10f\n", pistas[i].id, pistas[i].nombre, pistas[i].ubicacion, pistas[i].distancia);
+        printf("%-5d %-30s %-30s %-10.3f\n", pistas[i].id, pistas[i].nombre, pistas[i].ubicacion, pistas[i].distancia);
     }
 }

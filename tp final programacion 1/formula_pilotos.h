@@ -12,7 +12,7 @@ int modificarPiloto(stPiloto pilotos[], int cant, int id, stPiloto actualizado);
 int eliminarPiloto(stPiloto pilotos[], int *cant, int id);
 void listarPilotos(stPiloto pilotos[], int cant, stEscuderia escuderias[], int cantEscuderias);
 int buscarPilotoPorId(stPiloto pilotos[], int cant, int id);
-int generarIdPiloto(stPiloto pilotos[], int cant)
+int generarIdPiloto(stPiloto pilotos[], int cant);
 
 void ordenarPilotosAlfabeticamente(stPiloto pilotos[], int cant, stPiloto resultado[]);
 
@@ -28,12 +28,13 @@ int modificarEscuderia(stEscuderia escuderias[], int cant, int id, stEscuderia a
 int eliminarEscuderia(stEscuderia escuderias[], int *cant, int id, stPiloto pilotos[], int *cantPilotos);
 void listarEscuderias(stEscuderia escuderias[], int cant, stPiloto pilotos[], int cantPilotos);
 int buscarEscuderiaPorId(stEscuderia escuderias[], int cant, int id);
+int generarIdEscuderia(stEscuderia escuderias[], int cant);
 
 void guardarEscuderias(stEscuderia escuderias[], int cant);
 void cargarEscuderias(stEscuderia escuderias[], int *cant);
 
-int hayEscuderiaDisponible(stEscuderia escuderias[], int cant);
-void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant);
+int hayEscuderiaDisponible(stEscuderia escuderias[], int cant, int categoria);
+void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categoria);
 void ordenarEscuderiasAlfabeticamente(stEscuderia escuderias[], int cant, stEscuderia resultado[]);
 
 

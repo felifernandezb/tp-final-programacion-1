@@ -1,6 +1,8 @@
 #ifndef FORMULA_PISTAS_H_INCLUDED
 #define FORMULA_PISTAS_H_INCLUDED
 
+#include "formula.h"
+
 /// FUNCIONES DE REGISTRO, EDICIÓN Y ELIMINACIÓN DE PISTAS
 int buscarPistaPorId (stPista pistas[], int cant, int id);
 int generarIDPista (stPista pistas[], int cant);
