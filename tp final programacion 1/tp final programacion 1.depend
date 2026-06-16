@@ -46,3 +46,52 @@
 1781487069 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_inicial.h
 	"formula.h"
 
+1781581008 source:c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_carreras.c
+	<stdio.h>
+	<string.h>
+	"formula.h"
+	"formula_carreras.h"
+	"formula_pistas.h"
+	"formula_pilotos.h"
+
+1781575413 c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula.h
+
+1781581008 c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_carreras.h
+	"formula.h"
+	"formula_pistas.h"
+
+1781575413 c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_pistas.h
+	"formula.h"
+
+1781575413 source:c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_pilotos.c
+	"formula_pilotos.h"
+	<stdio.h>
+	<string.h>
+
+1781575413 c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_pilotos.h
+	"formula.h"
+
+1781575413 source:c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_pistas.c
+	"formula_pistas.h"
+	<stdio.h>
+	<string.h>
+
+1781583221 source:c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"formula_pilotos.h"
+	"formula_pistas.h"
+	"formula_carreras.h"
+	"formula_inicial.h"
+
+1781581516 c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_inicial.h
+	"formula.h"
+
+1781581585 source:c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_inicial.c
+	"formula_inicial.h"
+	"formula_pilotos.h"
+	"formula_pistas.h"
+	"formula_carreras.h"
+	<string.h>
+	<stdio.h>
+

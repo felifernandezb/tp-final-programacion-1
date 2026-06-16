@@ -8,4 +8,6 @@ void cargarDatosIniciales(stPiloto pilotos[], int *cantPilotos,
                           stPista pistas[], int *cantPistas,
                           stCarrera carreras[], int *cantCarreras);
 
+                          void exportarTablaAPuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias);
+
 #endif // FORMULA_INICIAL_H_INCLUDED

@@ -3,6 +3,7 @@
 #include "formula_pistas.h"
 #include "formula_carreras.h"
 #include <string.h>
+#include <stdio.h>
 
 void cargarDatosIniciales(stPiloto pilotos[], int *cantPilotos,
                           stEscuderia escuderias[], int *cantEscuderias,
@@ -135,5 +136,62 @@ void cargarDatosIniciales(stPiloto pilotos[], int *cantPilotos,
     guardarPilotos(pilotos, *cantPilotos);
     guardarEscuderias(escuderias, *cantEscuderias);
     guardarPista(pistas, *cantPistas);
+    *cantCarreras = 0;
+    guardarCarreras(carreras, *cantCarreras);
 
+}
+
+void exportarTablaAPuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias)
+{
+    // Copiar y ordenar por puntaje de mayor a menor
+    stPiloto copia[MAX_PILOTOS];
+    for (int i = 0; i < cantPilotos; i++)
+        copia[i] = pilotos[i];
+
+    for (int i = 0; i < cantPilotos - 1; i++)
+        for (int j = i + 1; j < cantPilotos; j++)
+            if (copia[j].puntaje > copia[i].puntaje)
+            {
+                stPiloto temp = copia[i];
+                copia[i] = copia[j];
+                copia[j] = temp;
+            }
+
+    // Mostrar en pantalla
+    printf("\n=== TABLA DE PUNTAJES ===\n");
+    printf("%-5s %-30s %-20s %-10s %-10s\n", "Pos", "Piloto", "Escuderia", "Puntaje", "Cat");
+    printf("------------------------------------------------------------------------\n");
+    for (int i = 0; i < cantPilotos; i++)
+    {
+        int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, copia[i].idEscuderia);
+        printf("%-5d %-30s %-20s %-10d %-10s\n",
+               i + 1,
+               copia[i].nombre,
+               posEsc != -1 ? escuderias[posEsc].marca : "N/A",
+               copia[i].puntaje,
+               copia[i].categoria == 1 ? "F1" : "F2");
+    }
+
+    // Exportar a txt
+    FILE *archivo = fopen("puntajes.dat", "w");
+    if (archivo == NULL)
+    {
+        printf("Error al crear el archivo.\n");
+        return;
+    }
+    fprintf(archivo, "=== TABLA DE PUNTAJES ===\n");
+    fprintf(archivo, "%-5s %-30s %-20s %-10s %-10s\n", "Pos", "Piloto", "Escuderia", "Puntaje", "Cat");
+    fprintf(archivo, "------------------------------------------------------------------------\n");
+    for (int i = 0; i < cantPilotos; i++)
+    {
+        int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, copia[i].idEscuderia);
+        fprintf(archivo, "%-5d %-30s %-20s %-10d %-10s\n",
+                i + 1,
+                copia[i].nombre,
+                posEsc != -1 ? escuderias[posEsc].marca : "N/A",
+                copia[i].puntaje,
+                copia[i].categoria == 1 ? "F1" : "F2");
+    }
+    fclose(archivo);
+    printf("Tabla exportada a puntajes.txt correctamente.\n");
 }

@@ -31,7 +31,9 @@ int main()
         printf("2. Escuderias\n");
         printf("3. Pistas\n");
         printf("4. Carreras\n");
-        printf("5. Restablecer datos iniciales\n");
+        printf("5. Tabla de piloto\n");
+        printf("6. Restablecer datos iniciales\n");
+
         printf("0. Salir\n");
         printf("Opcion: ");
         scanf("%d", &opcion);
@@ -152,6 +154,20 @@ int main()
                     printf("ID del piloto a eliminar: ");
                     scanf("%d", &id);
 
+                    int pos = buscarPilotoPorId(pilotos, cantPilotos, id);
+                    if (pos != -1)
+                    {
+                        int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, pilotos[pos].idEscuderia);
+                        if (posEsc != -1)
+                        {
+                            if (escuderias[posEsc].idPiloto1 == id)
+                                escuderias[posEsc].idPiloto1 = -1;
+                            else if (escuderias[posEsc].idPiloto2 == id)
+                                escuderias[posEsc].idPiloto2 = -1;
+                            guardarEscuderias(escuderias, cantEscuderias);
+                        }
+                    }
+
                     if (eliminarPiloto(pilotos, &cantPilotos, id))
                         printf("Piloto eliminado correctamente.\n");
                     else
@@ -246,10 +262,16 @@ int main()
                     int id;
                     printf("ID de la escuderia a eliminar: ");
                     scanf("%d", &id);
+                    int confirma = -1;
+                    while (confirma != 1 && confirma != 0)
+                    {
+                        printf("Esto eliminara tambien sus pilotos. Confirma? (1=Si, 0=No): ");
+                        scanf("%d", &confirma);
+                        if (confirma != 1 && confirma != 0)
+                            printf("Error, numero no valido, intente nuevamente.\n");
 
-                    printf("Esto eliminara tambien sus pilotos. Confirma? (1=Si, 0=No): ");
-                    int confirma;
-                    scanf("%d", &confirma);
+                    }
+
 
                     if (confirma == 1)
                     {
@@ -385,7 +407,7 @@ int main()
                 {
                 case 1:
                 {
-                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos);
+                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos, cantPilotos);
                     break;
                 }
                 case 2:
@@ -436,6 +458,18 @@ int main()
                           &nueva.vueltaRapida.segundos,
                           &nueva.vueltaRapida.milisegundos);
 
+                    int pos1 = buscarPilotoPorId(pilotos, cantPilotos, nueva.podio[0]);
+                    int pos2 = buscarPilotoPorId(pilotos, cantPilotos, nueva.podio[1]);
+                    int pos3 = buscarPilotoPorId(pilotos, cantPilotos, nueva.podio[2]);
+                    int posVR = buscarPilotoPorId(pilotos, cantPilotos, nueva.vueltaRapida.idPiloto);
+
+                    if (pos1 != -1) pilotos[pos1].puntaje += 25;
+                    if (pos2 != -1) pilotos[pos2].puntaje += 18;
+                    if (pos3 != -1) pilotos[pos3].puntaje += 15;
+                    if (posVR != -1) pilotos[posVR].puntaje += 1;
+
+                    guardarPilotos(pilotos, cantPilotos);
+
                     if (registrarCarrera(carreras, &cantCarreras, nueva))
                         printf("Carrera registrada correctamente.\n");
                     else
@@ -444,13 +478,14 @@ int main()
                 }
                 case 3:
                 {
-                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos);
+                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos, cantPilotos);
 
                     int id;
                     printf("ID de la carrera a modificar: ");
                     scanf("%d", &id);
-
                     stCarrera nueva;
+                    nueva.id = id;
+
                     listarPistas(pistas, cantPistas);
                     printf("ID de la pista: ");
                     scanf("%d", &nueva.idPista);
@@ -482,7 +517,7 @@ int main()
                 }
                 case 4:
                 {
-                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos);
+                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos, cantPilotos);
 
                     int id;
                     printf("ID de la carrera a eliminar: ");
@@ -510,7 +545,7 @@ int main()
                         break;
                     }
 
-                    listarCarrerasDePiloto(carreras, cantCarreras, pistas, id, cantPistas);
+                    listarCarrerasDePiloto(carreras, cantCarreras, pistas, id, cantPistas, pilotos, cantPilotos);
                     break;
                 }
                 case 6:
@@ -529,7 +564,7 @@ int main()
                         break;
                     }
 
-                    listarCarrerasDePista(carreras, cantCarreras, pistas, id, cantPistas);
+                    listarCarrerasDePista(carreras, cantCarreras, pistas, id, cantPistas, pilotos, cantPilotos);
                     break;
                 }
                 case 0:
@@ -542,8 +577,23 @@ int main()
             break;
         }
         case 5:
-            cargarDatosIniciales(pilotos, &cantPilotos, escuderias, &cantEscuderias, pistas, &cantPistas, carreras, &cantCarreras);
+        {
+            exportarTablaAPuntajes(pilotos, cantPilotos, escuderias, cantEscuderias);
+            printf("Tabla exportada con exito.");
             break;
+        }
+        case 6:
+        {
+            cantPilotos = 0;
+            cantEscuderias = 0;
+            cantPistas = 0;
+            cantCarreras = 0;
+            cargarDatosIniciales(pilotos, &cantPilotos, escuderias, &cantEscuderias, pistas, &cantPistas, carreras, &cantCarreras);
+            printf("Datos iniciales restablecidos.\n");
+            break;
+
+        }
+
         case 0:
             printf("Saliendo...\n");
             break;

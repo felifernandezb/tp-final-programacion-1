@@ -3,6 +3,7 @@
 #include "formula.h"
 #include "formula_carreras.h"
 #include "formula_pistas.h"
+#include "formula_pilotos.h"
 
 // =================
 // FUNCIONES CARRERAS
@@ -95,7 +96,7 @@ void cargarCarreras(stCarrera carrera[], int *cant)
     fclose(archivo);
 }
 
-void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPistas, stPiloto pilotos[])
+void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPistas, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
@@ -112,52 +113,64 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
 
         char fecha[15];
         sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
+        int pos1 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[0]);
+        int pos2 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[1]);
+        int pos3 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[2]);
 
         printf("%-6d %-20s %-20s %-15s %-15s %-15s\n",
                carrera[i].id,
                fecha,
                pista[posPista].nombre,
-               pilotos[0].nombre,
-               pilotos[1].nombre,
-               pilotos[2].nombre);
+               pos1 != -1 ? pilotos[pos1].nombre : "N/A",
+               pos2 != -1 ? pilotos[pos2].nombre : "N/A",
+               pos3 != -1 ? pilotos[pos3].nombre : "N/A");
+
+        int posVR = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].vueltaRapida.idPiloto);
+        printf("  Vuelta rapida: %s - %d:%02d:%03d\n",
+               posVR != -1 ? pilotos[posVR].nombre : "N/A",
+               carrera[i].vueltaRapida.minutos,
+               carrera[i].vueltaRapida.segundos,
+               carrera[i].vueltaRapida.milisegundos);
     }
 }
 
-void listarCarrerasDePista(stCarrera carrera[], int cant, stPista pista[], int idPista, int cantPistas)
+void listarCarrerasDePista(stCarrera carrera[], int cant, stPista pista[], int idPista, int cantPistas, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
         printf("No hay carreras registradas.\n");
         return;
     }
-
-    printf("%-6s %-30s %-20s %-10s %-10s %-10s\n", "ID", "Fecha", "Pista", "1ro", "2ro", "3ro");
-    printf("--------------------------------------------------------------------\n");
-
+    printf("%-6s %-15s %-20s %-20s %-20s %-20s\n", "ID", "Fecha", "Pista", "1ro", "2ro", "3ro");
+    printf("---------------------------------------------------------------------------------------------\n");
     for (int i = 0; i < cant; i++)
     {
         if (carrera[i].idPista == idPista)
         {
             int posPista = buscarPistaPorId(pista, cantPistas, carrera[i].idPista);
-
             char fecha[15];
             sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
-
-            printf("%-6d %-15s %-20s %-10d %-10d %-10d\n",
+            int pos1 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[0]);
+            int pos2 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[1]);
+            int pos3 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[2]);
+            printf("%-6d %-15s %-20s %-20s %-20s %-20s\n",
                    carrera[i].id,
                    fecha,
                    pista[posPista].nombre,
-                   carrera[i].podio[0],
-                   carrera[i].podio[1],
-                   carrera[i].podio[2]);
-
-
+                   pos1 != -1 ? pilotos[pos1].nombre : "N/A",
+                   pos2 != -1 ? pilotos[pos2].nombre : "N/A",
+                   pos3 != -1 ? pilotos[pos3].nombre : "N/A");
+            int posVR = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].vueltaRapida.idPiloto);
+            printf("  Vuelta rapida: %s - %d:%02d:%03d\n",
+                   posVR != -1 ? pilotos[posVR].nombre : "N/A",
+                   carrera[i].vueltaRapida.minutos,
+                   carrera[i].vueltaRapida.segundos,
+                   carrera[i].vueltaRapida.milisegundos);
         }
     }
-
 }
 
-void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int idPiloto, int cantPistas)
+void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int idPiloto, int cantPistas, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
@@ -179,14 +192,17 @@ void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int 
 
             char fecha[15];
             sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
+            int pos1 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[0]);
+            int pos2 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[1]);
+            int pos3 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[2]);
 
-            printf("%-6d %-15s %-20s %-10d %-10d %-10d\n",
+            printf("%-6d %-15s %-20s %-20s %-20s %-20s\n",
                    carrera[i].id,
                    fecha,
                    pista[posPista].nombre,
-                   carrera[i].podio[0],
-                   carrera[i].podio[1],
-                   carrera[i].podio[2]);
+                   pos1 != -1 ? pilotos[pos1].nombre : "N/A",
+                   pos2 != -1 ? pilotos[pos2].nombre : "N/A",
+                   pos3 != -1 ? pilotos[pos3].nombre : "N/A");
 
             if (carrera[i].vueltaRapida.idPiloto == idPiloto)
             {
