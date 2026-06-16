@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 
+// =====================
+//   FUNCIONES PISTAS
+// =====================
+
 int buscarPistaPorId (stPista pistas[], int cant, int id)
 {
     for (int i = 0; i < cant; i++)

@@ -23,7 +23,7 @@ typedef struct {
     char sponsor[50];
     int idPiloto1;
     int idPiloto2;
-    int categoria;
+    int categoria;      // 1 = F1, 2 = F2
 } stEscuderia;
 
 typedef struct {
@@ -31,7 +31,7 @@ typedef struct {
     char nombre[50];
     int idEscuderia;
     int puntaje;
-    int categoria;  // 1 = F1, 2 = F2
+    int categoria;
 } stPiloto;
 
 typedef struct {
