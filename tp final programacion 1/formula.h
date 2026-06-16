@@ -1,15 +1,17 @@
 #ifndef FORMULA_H_INCLUDED
 #define FORMULA_H_INCLUDED
 
+#define DIMENSION_INICIAL_PISTAS 25
 #define MAX_PILOTOS     48
 #define MAX_ESCUDERIAS  24
-#define MAX_PISTAS      30
 #define MAX_CARRERAS    35
 #define MAX_PODIO       3
 
 // =====================
 //   TIPOS Y ESTRUCTURAS
 // =====================
+
+
 
 typedef struct {
     int dia;
@@ -57,4 +59,9 @@ typedef struct {
     int idPista;
 } stCarrera;
 
+typedef struct {
+    stPista *pistas;
+    int dimension;
+    int validos;
+} stColeccionPistas;
 #endif // FORMULA_H_INCLUDED

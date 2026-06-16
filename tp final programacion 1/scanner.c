@@ -65,7 +65,11 @@ char scanChar(void)
 float scanFloat(void)
 {
     float aux = 0;
-    scanf("%f", &aux);
+    while (scanf("%f", &aux) != 1)
+    {
+        limpiarBuferDeEntrada();
+        printf("Ingrese un numero valido: ");
+    }
     limpiarBuferDeEntrada();
     return aux;
 }
@@ -135,7 +139,7 @@ int scanIdPiloto(stPiloto pilotos[], int cantPilotos, char* mensaje)
     return id;
 }
 
-int scanIdPista(stPista pistas[], int cantPistas)
+int scanIdPista(stColeccionPistas *col)
 {
     int id;
     do
@@ -143,10 +147,10 @@ int scanIdPista(stPista pistas[], int cantPistas)
         printf("ID de la pista: ");
         id = scanInt();
 
-        if (buscarPistaPorId(pistas, cantPistas, id) == -1)
+        if (buscarPistaPorId(&col, &col->pistas, id) == -1)
             printf("Pista no encontrada. Ingrese un ID valido.\n");
     }
-    while (buscarPistaPorId(pistas, cantPistas, id) == -1);
+    while (buscarPistaPorId(pistas, &col->pistas, id) == -1);
 
     return id;
 }

@@ -3,19 +3,23 @@
 
 #include "formula.h"
 
+/// FUNCIONES DINAMICAS+
+int inicializarColeccion(stColeccionPistas *col);
+int expandirColeccion(stColeccionPistas *col);
+
 /// FUNCIONES DE REGISTRO, EDICIÓN Y ELIMINACIÓN DE PISTAS
-int buscarPistaPorId (stPista pistas[], int cant, int id);
-int generarIDPista (stPista pistas[], int cant);
-int registrarPista (stPista pistas[], int *cant, stPista nuevo);
-int modificarPista (stPista pistas[], int cant, int id, stPista nuevaPista);
-int eliminarPista (stPista pistas[], int *cant, int idPistaABorrar);
+int buscarPistaPorId(stColeccionPistas *col, int id);
+int generarIDPista(stColeccionPistas *col);
+int registrarPista(stColeccionPistas *col, stPista nuevo);
+int modificarPista(stColeccionPistas *col, int id, stPista nuevaPista);
+int eliminarPista(stColeccionPistas *col, int idPistaABorrar);
 
 /// FUNCION DE CARGA Y GUARDADO
-void guardarPista (stPista pistas[], int cant);
-void cargarPista (stPista pistas[], int *cant);
+void guardarPista(stColeccionPistas *col);
+void cargarPista(stColeccionPistas *col);
 
 /// FUNCIONES DE ORDEN Y MUESTRA
-void ordenarPistasAlfabeticamente (stPista pistas[], int cant, stPista pistasOrdenadas[]);
-void listarPistas (stPista pistas[], int cant);
+void ordenarPistasAlfabeticamente(stColeccionPistas *col, stPista pistasOrdenadas[]);
+void listarPistas(stColeccionPistas *col);
 
 #endif // FORMULA_PISTAS_H_INCLUDED

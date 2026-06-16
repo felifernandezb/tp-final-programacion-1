@@ -96,7 +96,7 @@ void cargarCarreras(stCarrera carrera[], int *cant)
     fclose(archivo);
 }
 
-void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPistas, stPiloto pilotos[], int cantPilotos)
+void listarCarreras(stCarrera carrera[], int cant, stColeccionPistas *col, int cantPistas, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
@@ -109,7 +109,7 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
 
     for (int i = 0; i < cant; i++)
     {
-        int posPista = buscarPistaPorId(pista, cantPistas, carrera[i].idPista);
+        int posPista = buscarPistaPorId(col, carrera[i].idPista);
 
         char fecha[15];
         sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
@@ -120,7 +120,7 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
         printf("%-6d %-20s %-20s %-15s %-15s %-15s\n",
                carrera[i].id,
                fecha,
-               posPista != -1 ? pista[posPista].nombre : "Desconocida",
+               posPista != -1 ? col->pistas[posPista].nombre : "Desconocida",
                pos1 != -1 ? pilotos[pos1].nombre : "N/A",
                pos2 != -1 ? pilotos[pos2].nombre : "N/A",
                pos3 != -1 ? pilotos[pos3].nombre : "N/A");
@@ -134,7 +134,7 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
     }
 }
 
-void listarCarrerasDePista(stCarrera carrera[], int cant, stPista pista[], int idPista, int cantPistas, stPiloto pilotos[], int cantPilotos)
+void listarCarrerasDePista(stCarrera carrera[], int cant, stColeccionPistas *col , int idPista, int cantPistas, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
@@ -147,7 +147,7 @@ void listarCarrerasDePista(stCarrera carrera[], int cant, stPista pista[], int i
     {
         if (carrera[i].idPista == idPista)
         {
-            int posPista = buscarPistaPorId(pista, cantPistas, carrera[i].idPista);
+            int posPista = buscarPistaPorId(col, carrera[i].idPista);
             char fecha[15];
             sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
             int pos1 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[0]);
@@ -156,7 +156,7 @@ void listarCarrerasDePista(stCarrera carrera[], int cant, stPista pista[], int i
             printf("%-6d %-15s %-20s %-20s %-20s %-20s\n",
                    carrera[i].id,
                    fecha,
-                   pista[posPista].nombre,
+                   col->pistas[posPista].nombre,
                    pos1 != -1 ? pilotos[pos1].nombre : "N/A",
                    pos2 != -1 ? pilotos[pos2].nombre : "N/A",
                    pos3 != -1 ? pilotos[pos3].nombre : "N/A");
@@ -170,7 +170,7 @@ void listarCarrerasDePista(stCarrera carrera[], int cant, stPista pista[], int i
     }
 }
 
-void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int idPiloto, int cantPistas, stPiloto pilotos[], int cantPilotos)
+void listarCarrerasDePiloto(stCarrera carrera[], int cant, stColeccionPistas *col, int idPiloto, int cantPistas, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
@@ -189,7 +189,7 @@ void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int 
                 carrera[i].vueltaRapida.idPiloto == idPiloto)
         {
             // 1. Buscamos la pista y VALIDAMOS que exista (evita el crash si está en 0)
-            int posPista = buscarPistaPorId(pista, cantPistas, carrera[i].idPista);
+            int posPista = buscarPistaPorId(col, carrera[i].idPista);
 
             char fecha[15];
             sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
@@ -201,7 +201,7 @@ void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int 
             printf("%-6d %-15s %-20s %-20s %-20s %-20s\n",
                    carrera[i].id,
                    fecha,
-                   posPista != -1 ? pista[posPista].nombre : "Desconocida", // Agregada validación aquí
+                   posPista != -1 ? col->pistas[posPista].nombre : "Desconocida", // Agregada validación aquí
                    pos1 != -1 ? pilotos[pos1].nombre : "N/A",
                    pos2 != -1 ? pilotos[pos2].nombre : "N/A",
                    pos3 != -1 ? pilotos[pos3].nombre : "N/A");

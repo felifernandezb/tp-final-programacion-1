@@ -11,18 +11,25 @@ int main()
     // Arrays y contadores
     stPiloto    pilotos[MAX_PILOTOS];
     stEscuderia escuderias[MAX_ESCUDERIAS];
-    stPista     pistas[MAX_PISTAS];
+    //stPista     pistas[MAX_PISTAS];
     stCarrera   carreras[MAX_CARRERAS];
     int cantPilotos = 0, cantEscuderias = 0, cantPistas = 0, cantCarreras = 0;
+
+    stColeccionPistas colPistas;
+    if (!inicializarColeccion(&colPistas))
+    {
+        printf("Error al inicializar la coleccion de pistas.\n");
+        return 1;
+    }
 
     // Cargar datos al arrancar
     cargarPilotos(pilotos, &cantPilotos);
     cargarEscuderias(escuderias, &cantEscuderias);
-    cargarPista(pistas, &cantPistas);
+    cargarPista(&colPistas);
     cargarCarreras(carreras, &cantCarreras);
 
     if (cantPilotos == 0 && cantEscuderias == 0)
-        cargarDatosIniciales(pilotos, &cantPilotos, escuderias, &cantEscuderias, pistas, &cantPistas, carreras, &cantCarreras);
+        cargarDatosIniciales(pilotos, &cantPilotos, escuderias, &cantEscuderias, &colPistas, carreras, &cantCarreras);
 
     int opcion;
     do
@@ -329,9 +336,12 @@ int main()
                 {
                 case 1:
                 {
-                    stPista copia[MAX_PISTAS];
-                    ordenarPistasAlfabeticamente(pistas, cantPistas, copia);
-                    listarPistas(copia, cantPistas);
+                    stColeccionPistas copia;
+                    inicializarColeccion(&copia);
+
+                    ordenarPistasAlfabeticamente(&colPistas, copia);
+                    listarPistas(copia, col->cant);
+                    free(&copia);
                     break;
                 }
                 case 2:
@@ -348,8 +358,16 @@ int main()
                     scanString(nueva.nombre, 50);
                     printf("Ubicacion: ");
                     scanString(nueva.ubicacion, 100);
-                    printf("Distancia (km): ");
-                    nueva.distancia = scanFloat();
+
+                    do
+                    {
+                        printf("Distancia (km): ");
+                        nueva.distancia = scanFloat();
+
+                        if (nueva.distancia < 0 || nueva.distancia >= 10)
+                            printf("Error. La distancia debe ser mayor a 0 y menor que 11.\n");
+                    }
+                    while (nueva.distancia < 0 || nueva.distancia >= 10);
 
                     if (registrarPista(pistas, &cantPistas, nueva))
                         printf("Pista registrada correctamente.\n");
@@ -372,8 +390,15 @@ int main()
                     scanString(actualizada.nombre, 50);
                     printf("Nueva ubicacion: ");
                     scanString(actualizada.ubicacion, 100);
-                    printf("Nueva distancia (km): ");
-                    actualizada.distancia = scanFloat();
+                    do
+                    {
+                        printf("Nueva distancia (km): ");
+                        actualizada.distancia = scanFloat();
+
+                        if (actualizada.distancia < 0 || actualizada.distancia >= 10)
+                            printf("Error. La distancia debe ser mayor a 0 y menor que 11.\n");
+                    }
+                    while (actualizada.distancia < 0 || actualizada.distancia >= 10);
 
                     if (modificarPista(pistas, cantPistas, id, actualizada))
                         printf("Pista modificada correctamente.\n");
@@ -648,5 +673,8 @@ int main()
         }
     }
     while (opcion != 0);
+
+    free(colPistas.pistas);
+
     return 0;
 }

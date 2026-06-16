@@ -1,10 +1,10 @@
 === TABLA DE PUNTAJES ===
 Pos   Piloto                         Escuderia            Puntaje    Cat       
 ------------------------------------------------------------------------
-1     Lando Norris                   McLaren              25         F1        
-2     Roman Bilinski                 DAMS                 18         F2        
-3     Emerson Fittipaldi Jr.         AIX Racing           15         F2        
-4     Franco Colapinto               Alpine               1          F1        
+1     Oliver Goether                 MP Motorsport        26         F2        
+2     Rafael Camara                  Invicta              18         F2        
+3     Noel Leon                      Campos               15         F2        
+4     Lewis Hamilton                 Ferrari              0          F1        
 5     Max Verstappen                 Red Bull             0          F1        
 6     Isack Hadjar                   Red Bull             0          F1        
 7     George Russell                 Mercedes             0          F1        
@@ -12,7 +12,7 @@ Pos   Piloto                         Escuderia            Puntaje    Cat
 9     Fernando Alonso                Aston Martin         0          F1        
 10    Lance Stroll                   Aston Martin         0          F1        
 11    Pierre Gasly                   Alpine               0          F1        
-12    Oscar Piastri                  McLaren              0          F1        
+12    Franco Colapinto               Alpine               0          F1        
 13    Esteban Ocon                   Haas                 0          F1        
 14    Ollie Bearman                  Haas                 0          F1        
 15    Liam Lawson                    Racing Bulls         0          F1        
@@ -29,19 +29,19 @@ Pos   Piloto                         Escuderia            Puntaje    Cat
 26    Alexander Dunne                Rodin                0          F2        
 27    Kush Maini                     ART Grand Prix       0          F2        
 28    Tasanapol Inthraphuvasak       ART Grand Prix       0          F2        
-29    Charles Leclerc                Ferrari              0          F1        
+29    Emerson Fittipaldi Jr.         AIX Racing           0          F2        
 30    Cian Shields                   AIX Racing           0          F2        
 31    Nicolas Varrone                Van Amersfoort       0          F2        
 32    Rafael Villagomez              Van Amersfoort       0          F2        
-33    Rafael Camara                  Invicta              0          F2        
+33    Lando Norris                   McLaren              0          F1        
 34    Joshua Durksen                 Invicta              0          F2        
 35    Colton Herta                   Hitech               0          F2        
 36    Laurens van Hoepen             Trident              0          F2        
 37    John Bennett                   Trident              0          F2        
-38    Oliver Goether                 MP Motorsport        0          F2        
+38    Oscar Piastri                  McLaren              0          F1        
 39    Gabriele Mini                  MP Motorsport        0          F2        
 40    Nikola Tsolov                  Campos               0          F2        
-41    Noel Leon                      Campos               0          F2        
+41    Charles Leclerc                Ferrari              0          F1        
 42    Ritomo Miyata                  Hitech               0          F2        
 43    Dino Beganovic                 DAMS                 0          F2        
-44    Lewis Hamilton                 Ferrari              0          F1        
+44    Roman Bilinski                 DAMS                 0          F2        

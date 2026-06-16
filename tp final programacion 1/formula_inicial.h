@@ -5,7 +5,7 @@
 
 void cargarDatosIniciales(stPiloto pilotos[], int *cantPilotos,
                           stEscuderia escuderias[], int *cantEscuderias,
-                          stPista pistas[], int *cantPistas,
+                          stColeccionPistas *colPistas,
                           stCarrera carreras[], int *cantCarreras);
 
 void exportarTablaAPuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias);
