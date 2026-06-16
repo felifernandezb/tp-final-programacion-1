@@ -336,40 +336,28 @@ int main()
                 {
                 case 1:
                 {
-                    stColeccionPistas copia;
-                    inicializarColeccion(&copia);
-
+                    stPista copia[DIMENSION_INICIAL_PISTAS * 2];
                     ordenarPistasAlfabeticamente(&colPistas, copia);
-                    listarPistas(copia, col->cant);
-                    free(&copia);
+                    listarPistas(copia, colPistas.validos);
                     break;
                 }
                 case 2:
                 {
-                    if (cantPistas >= MAX_PISTAS)
-                    {
-                        printf("No hay lugar para mas pistas.\n");
-                        break;
-                    }
                     stPista nueva;
-                    nueva.id = generarIDPista(pistas, cantPistas);
-
+                    nueva.id = generarIDPista(&colPistas);
                     printf("Nombre: ");
                     scanString(nueva.nombre, 50);
                     printf("Ubicacion: ");
                     scanString(nueva.ubicacion, 100);
-
                     do
                     {
                         printf("Distancia (km): ");
                         nueva.distancia = scanFloat();
-
-                        if (nueva.distancia < 0 || nueva.distancia >= 10)
+                        if (nueva.distancia <= 0 || nueva.distancia >= 11)
                             printf("Error. La distancia debe ser mayor a 0 y menor que 11.\n");
                     }
-                    while (nueva.distancia < 0 || nueva.distancia >= 10);
-
-                    if (registrarPista(pistas, &cantPistas, nueva))
+                    while (nueva.distancia <= 0 || nueva.distancia >= 11);
+                    if (registrarPista(&colPistas, nueva))
                         printf("Pista registrada correctamente.\n");
                     else
                         printf("Error al registrar pista.\n");
@@ -377,14 +365,12 @@ int main()
                 }
                 case 3:
                 {
-                    stPista copia[MAX_PISTAS];
-                    ordenarPistasAlfabeticamente(pistas, cantPistas, copia);
-                    listarPistas(copia, cantPistas);
-
+                    stPista copia[DIMENSION_INICIAL_PISTAS * 2];
+                    ordenarPistasAlfabeticamente(&colPistas, copia);
+                    listarPistas(copia, colPistas.validos);
                     int id;
                     printf("ID de la pista a modificar: ");
                     id = scanInt();
-
                     stPista actualizada;
                     printf("Nuevo nombre: ");
                     scanString(actualizada.nombre, 50);
@@ -394,13 +380,11 @@ int main()
                     {
                         printf("Nueva distancia (km): ");
                         actualizada.distancia = scanFloat();
-
-                        if (actualizada.distancia < 0 || actualizada.distancia >= 10)
+                        if (actualizada.distancia <= 0 || actualizada.distancia >= 11)
                             printf("Error. La distancia debe ser mayor a 0 y menor que 11.\n");
                     }
-                    while (actualizada.distancia < 0 || actualizada.distancia >= 10);
-
-                    if (modificarPista(pistas, cantPistas, id, actualizada))
+                    while (actualizada.distancia <= 0 || actualizada.distancia >= 11);
+                    if (modificarPista(&colPistas, id, actualizada))
                         printf("Pista modificada correctamente.\n");
                     else
                         printf("Pista no encontrada.\n");
@@ -408,15 +392,13 @@ int main()
                 }
                 case 4:
                 {
-                    stPista copia[MAX_PISTAS];
-                    ordenarPistasAlfabeticamente(pistas, cantPistas, copia);
-                    listarPistas(copia, cantPistas);
-
+                    stPista copia[DIMENSION_INICIAL_PISTAS * 2];
+                    ordenarPistasAlfabeticamente(&colPistas, copia);
+                    listarPistas(copia, colPistas.validos);
                     int id;
                     printf("ID de la pista a eliminar: ");
                     id = scanInt();
-
-                    if (eliminarPista(pistas, &cantPistas, id))
+                    if (eliminarPista(&colPistas, id))
                         printf("Pista eliminada correctamente.\n");
                     else
                         printf("Pista no encontrada.\n");
@@ -451,7 +433,7 @@ int main()
                 {
                 case 1:
                 {
-                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos, cantPilotos);
+                    listarCarreras(carreras, cantCarreras, &colPistas, pilotos, cantPilotos);
                     break;
                 }
                 case 2:
@@ -465,9 +447,10 @@ int main()
                     stCarrera nueva;
                     nueva.id = generarIdCarrera(carreras, cantCarreras);
 
-                    listarPistas(pistas, cantPistas);
-                    nueva.idPista = scanIdPista(pistas, cantPistas);
-
+                    stPista copia[DIMENSION_INICIAL_PISTAS * 2];
+                    ordenarPistasAlfabeticamente(&colPistas, copia);
+                    listarPistas(copia, colPistas.validos);
+                    nueva.idPista = scanIdPista(&colPistas);
                     scanFecha(&nueva.fecha);
 
                     if (hayChoqueFechas(carreras, cantCarreras, nueva.idPista, nueva.fecha))
@@ -517,7 +500,7 @@ int main()
                 }
                 case 3:
                 {
-                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos, cantPilotos);
+                    listarCarreras(carreras, cantCarreras, &colPistas, pilotos, cantPilotos);
 
                     printf("ID de la carrera a modificar: ");
                     int id = scanInt();
@@ -531,9 +514,11 @@ int main()
                     stCarrera nueva;
                     nueva.id = id;
 
-                    listarPistas(pistas, cantPistas);
-                    nueva.idPista = scanIdPista(pistas, cantPistas);
+                    stPista copia[DIMENSION_INICIAL_PISTAS * 2];
+                    ordenarPistasAlfabeticamente(&colPistas, copia);
+                    listarPistas(copia, colPistas.validos);
 
+                    nueva.idPista = scanIdPista(&colPistas);
                     scanFecha(&nueva.fecha);
 
                     do
@@ -565,7 +550,7 @@ int main()
                 }
                 case 4:
                 {
-                    listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos, cantPilotos);
+                    listarCarreras(carreras, cantCarreras, &colPistas, pilotos, cantPilotos);
 
                     int id;
                     printf("ID de la carrera a eliminar: ");
@@ -582,37 +567,31 @@ int main()
                     stPiloto copia[MAX_PILOTOS];
                     ordenarPilotosAlfabeticamente(pilotos, cantPilotos, copia);
                     listarPilotos(copia, cantPilotos, escuderias, cantEscuderias);
-
                     int id;
                     printf("ID del piloto: ");
                     id = scanInt();
-
                     if (buscarPilotoPorId(pilotos, cantPilotos, id) == -1)
                     {
                         printf("Piloto no encontrado.\n");
                         break;
                     }
-
-                    listarCarrerasDePiloto(carreras, cantCarreras, pistas, id, cantPistas, pilotos, cantPilotos);
+                    listarCarrerasDePiloto(carreras, cantCarreras, &colPistas, id, pilotos, cantPilotos);
                     break;
                 }
                 case 6:
                 {
-                    stPista copia[MAX_PISTAS];
-                    ordenarPistasAlfabeticamente(pistas, cantPistas, copia);
-                    listarPistas(copia, cantPistas);
-
+                    stPista copia[DIMENSION_INICIAL_PISTAS * 2];
+                    ordenarPistasAlfabeticamente(&colPistas, copia);
+                    listarPistas(copia, colPistas.validos);
                     int id;
                     printf("ID de la pista: ");
                     id = scanInt();
-
-                    if (buscarPistaPorId(pistas, cantPistas, id) == -1)
+                    if (buscarPistaPorId(&colPistas, id) == -1)
                     {
                         printf("Pista no encontrada.\n");
                         break;
                     }
-
-                    listarCarrerasDePista(carreras, cantCarreras, pistas, id, cantPistas, pilotos, cantPilotos);
+                    listarCarrerasDePista(carreras, cantCarreras, &colPistas, id, pilotos, cantPilotos);
                     break;
                 }
                 case 0:
@@ -639,10 +618,12 @@ int main()
                 switch (opPuntajes)
                 {
                 case 1:
-                    mostrarTablaDePuntajes(pilotos, cantPilotos, escuderias, cantEscuderias);
+                    mostrarTablaPorCategoria(pilotos, cantPilotos, escuderias, cantEscuderias, 1);
+                    mostrarTablaPorCategoria(pilotos, cantPilotos, escuderias, cantEscuderias, 2);
                     break;
                 case 2:
-                    exportarTablaDePuntajes(pilotos, cantPilotos, escuderias, cantEscuderias);
+                    exportarTablaPorCategoria(pilotos, cantPilotos, escuderias, cantEscuderias, 1);
+                    exportarTablaPorCategoria(pilotos, cantPilotos, escuderias, cantEscuderias, 2);
                     break;
                 case 0:
                     break;
@@ -657,12 +638,11 @@ int main()
         {
             cantPilotos = 0;
             cantEscuderias = 0;
-            cantPistas = 0;
             cantCarreras = 0;
-            cargarDatosIniciales(pilotos, &cantPilotos, escuderias, &cantEscuderias, pistas, &cantPistas, carreras, &cantCarreras);
+            colPistas.validos = 0;  // resetear la colección
+            cargarDatosIniciales(pilotos, &cantPilotos, escuderias, &cantEscuderias, &colPistas, carreras, &cantCarreras);
             printf("Datos iniciales restablecidos.\n");
             break;
-
         }
 
         case 0:

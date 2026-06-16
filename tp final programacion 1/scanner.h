@@ -11,6 +11,6 @@ float scanFloat(void);
 int scanString(char* string, int maxLength);
 void scanFecha(stFecha *fecha);
 int scanIdPiloto(stPiloto pilotos[], int cantPilotos, char* mensaje);
-int scanIdPista(stPista pistas[], int cantPistas);
+int scanIdPista(stColeccionPistas *col);
 
 #endif // SCANNER_H_INCLUDED

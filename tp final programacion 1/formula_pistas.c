@@ -110,10 +110,11 @@ void cargarPista(stColeccionPistas *col)
     fclose(archi);
 }
 
-void ordenarPistasAlfabeticamente(stColeccionPistas *col, stColeccionPistas copia)
+void ordenarPistasAlfabeticamente(stColeccionPistas *col, stPista pistasOrdenadas[])
 {
     for (int i = 0; i < col->validos; i++)
         pistasOrdenadas[i] = col->pistas[i];
+
     for (int i = 0; i < col->validos - 1; i++)
         for (int j = 0; j < col->validos - i - 1; j++)
             if (strcmp(pistasOrdenadas[j].nombre, pistasOrdenadas[j+1].nombre) > 0)
@@ -124,20 +125,19 @@ void ordenarPistasAlfabeticamente(stColeccionPistas *col, stColeccionPistas copi
             }
 }
 
-void listarPistas(stColeccionPistas *col)
+void listarPistas(stPista pistasOrdenadas[], int cant)
 {
-    if (col->validos == 0)
+    if (cant == 0)
     {
         printf("No hay datos guardados.\n");
         return;
     }
     printf("%-5s %-30s %-30s %-10s\n", "ID", "Nombre", "Ubicacion", "Distancia (km)");
     printf("---------------------------------------------------------------------------------\n");
-    for (int i = 0; i < col->validos; i++)
+    for (int i = 0; i < cant; i++)
         printf("%-5d %-30s %-30s %-10.3f\n",
-               col->pistas[i].id,
-               col->pistas[i].nombre,
-               col->pistas[i].ubicacion,
-               col->pistas[i].distancia);
+               pistasOrdenadas[i].id,
+               pistasOrdenadas[i].nombre,
+               pistasOrdenadas[i].ubicacion,
+               pistasOrdenadas[i].distancia);
 }
-

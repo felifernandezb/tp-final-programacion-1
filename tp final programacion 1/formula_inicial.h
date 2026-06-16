@@ -10,7 +10,7 @@ void cargarDatosIniciales(stPiloto pilotos[], int *cantPilotos,
 
 void exportarTablaAPuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias);
 void ordenarPilotosPorPuntaje(stPiloto pilotos[], int cantPilotos, stPiloto resultado[]);
-void mostrarTablaDePuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias);
-void exportarTablaDePuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias);
+void mostrarTablaPorCategoria(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias, int categoria);
+void exportarTablaPorCategoria(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias, int categoria);
 
 #endif // FORMULA_INICIAL_H_INCLUDED

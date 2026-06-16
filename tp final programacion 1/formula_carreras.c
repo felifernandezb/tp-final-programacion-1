@@ -96,7 +96,7 @@ void cargarCarreras(stCarrera carrera[], int *cant)
     fclose(archivo);
 }
 
-void listarCarreras(stCarrera carrera[], int cant, stColeccionPistas *col, int cantPistas, stPiloto pilotos[], int cantPilotos)
+void listarCarreras(stCarrera carrera[], int cant, stColeccionPistas *col, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
@@ -134,7 +134,7 @@ void listarCarreras(stCarrera carrera[], int cant, stColeccionPistas *col, int c
     }
 }
 
-void listarCarrerasDePista(stCarrera carrera[], int cant, stColeccionPistas *col , int idPista, int cantPistas, stPiloto pilotos[], int cantPilotos)
+void listarCarrerasDePista(stCarrera carrera[], int cant, stColeccionPistas *col , int idPista, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
@@ -170,7 +170,7 @@ void listarCarrerasDePista(stCarrera carrera[], int cant, stColeccionPistas *col
     }
 }
 
-void listarCarrerasDePiloto(stCarrera carrera[], int cant, stColeccionPistas *col, int idPiloto, int cantPistas, stPiloto pilotos[], int cantPilotos)
+void listarCarrerasDePiloto(stCarrera carrera[], int cant, stColeccionPistas *col, int idPiloto, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {

@@ -105,35 +105,36 @@ void cargarDatosIniciales(stPiloto pilotos[], int *cantPilotos,
     // ========================
    stPista pi;
 
-    pi.id= 1; strcpy(pi.nombre, "Albert Park");          strcpy(pi.ubicacion, "Melbourne, Australia");   pi.distancia = 5.278f; registrarPista(colPistas, pi);
-    pi.id= 2; strcpy(pi.nombre, "Shanghai");             strcpy(pi.ubicacion, "Shanghai, China");        pi.distancia = 5.451f; registrarPista(colPistas, pi);
-    pi.id= 3; strcpy(pi.nombre, "Suzuka");               strcpy(pi.ubicacion, "Suzuka, Japon");          pi.distancia = 5.807f; registrarPista(colPistas, pi);
-    pi.id= 4; strcpy(pi.nombre, "Sakhir");               strcpy(pi.ubicacion, "Sakhir, Bahrain");        pi.distancia = 5.412f; registrarPista(colPistas, pi);
-    pi.id= 5; strcpy(pi.nombre, "Jeddah");               strcpy(pi.ubicacion, "Jeddah, Arabia Saudita"); pi.distancia = 6.174f; registrarPista(colPistas, pi);
-    pi.id= 6; strcpy(pi.nombre, "Miami");                strcpy(pi.ubicacion, "Miami, USA");             pi.distancia = 5.412f; registrarPista(colPistas, pi);
-    pi.id= 7; strcpy(pi.nombre, "Circuit Gilles Villeneuve"); strcpy(pi.ubicacion, "Montreal, Canada"); pi.distancia = 4.361f; registrarPista(colPistas, pi);
-    pi.id= 8; strcpy(pi.nombre, "Monaco");               strcpy(pi.ubicacion, "Monaco");                 pi.distancia = 3.337f; registrarPista(colPistas, pi);
-    pi.id= 9; strcpy(pi.nombre, "Barcelona-Catalunya");  strcpy(pi.ubicacion, "Barcelona, Espana");      pi.distancia = 4.657f; registrarPista(colPistas, pi);
-    pi.id=10; strcpy(pi.nombre, "Red Bull Ring");        strcpy(pi.ubicacion, "Spielberg, Austria");     pi.distancia = 4.318f; registrarPista(colPistas, pi);
-    pi.id=11; strcpy(pi.nombre, "Silverstone");          strcpy(pi.ubicacion, "Silverstone, Gran Bretana"); pi.distancia = 5.891f; registrarPista(colPistas, pi);
-    pi.id=12; strcpy(pi.nombre, "Hungaroring");          strcpy(pi.ubicacion, "Budapest, Hungria");      pi.distancia = 4.381f; registrarPista(colPistas, pi);
-    pi.id=13; strcpy(pi.nombre, "Spa-Francorchamps");    strcpy(pi.ubicacion, "Spa, Belgica");           pi.distancia = 7.004f; registrarPista(colPistas, pi);
-    pi.id=14; strcpy(pi.nombre, "Zandvoort");            strcpy(pi.ubicacion, "Zandvoort, Holanda");     pi.distancia = 4.259f; registrarPista(colPistas, pi);
-    pi.id=15; strcpy(pi.nombre, "Monza");                strcpy(pi.ubicacion, "Monza, Italia");          pi.distancia = 5.793f; registrarPista(colPistas, pi);
-    pi.id=16; strcpy(pi.nombre, "Baku");                 strcpy(pi.ubicacion, "Baku, Azerbaiyan");       pi.distancia = 6.003f; registrarPista(colPistas, pi);
-    pi.id=17; strcpy(pi.nombre, "Marina Bay");           strcpy(pi.ubicacion, "Singapur");               pi.distancia = 4.940f; registrarPista(colPistas, pi);
-    pi.id=18; strcpy(pi.nombre, "Circuit of the Americas"); strcpy(pi.ubicacion, "Austin, USA");         pi.distancia = 5.513f; registrarPista(colPistas, pi);
-    pi.id=19; strcpy(pi.nombre, "Autodromo Hermanos Rodriguez"); strcpy(pi.ubicacion, "Mexico DF, Mexico"); pi.distancia = 4.304f; registrarPista(colPistas, pi);
-    pi.id=20; strcpy(pi.nombre, "Interlagos");           strcpy(pi.ubicacion, "Sao Paulo, Brasil");      pi.distancia = 4.309f; registrarPista(colPistas, pi);
-    pi.id=21; strcpy(pi.nombre, "Las Vegas");            strcpy(pi.ubicacion, "Las Vegas, USA");         pi.distancia = 6.201f; registrarPista(colPistas, pi);
-    pi.id=22; strcpy(pi.nombre, "Losail");               strcpy(pi.ubicacion, "Lusail, Qatar");          pi.distancia = 5.380f; registrarPista(colPistas, pi);
-    pi.id=23; strcpy(pi.nombre, "Yas Marina");           strcpy(pi.ubicacion, "Abu Dhabi, EAU");         pi.distancia = 5.281f; registrarPista(colPistas, pi);
-    pi.id=24; strcpy(pi.nombre, "Madrid");               strcpy(pi.ubicacion, "Madrid, Espana");         pi.distancia = 5.500f; registrarPista(colPistas, pi);
+    pi.id= 1; strcpy(pi.nombre, "Albert Park");          strcpy(pi.ubicacion, "Melbourne, Australia");   pi.distancia = 5.278f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id= 2; strcpy(pi.nombre, "Shanghai");             strcpy(pi.ubicacion, "Shanghai, China");        pi.distancia = 5.451f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id= 3; strcpy(pi.nombre, "Suzuka");               strcpy(pi.ubicacion, "Suzuka, Japon");          pi.distancia = 5.807f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id= 4; strcpy(pi.nombre, "Sakhir");               strcpy(pi.ubicacion, "Sakhir, Bahrain");        pi.distancia = 5.412f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id= 5; strcpy(pi.nombre, "Jeddah");               strcpy(pi.ubicacion, "Jeddah, Arabia Saudita"); pi.distancia = 6.174f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id= 6; strcpy(pi.nombre, "Miami");                strcpy(pi.ubicacion, "Miami, USA");             pi.distancia = 5.412f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id= 7; strcpy(pi.nombre, "Circuit Gilles Villeneuve"); strcpy(pi.ubicacion, "Montreal, Canada"); pi.distancia = 4.361f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id= 8; strcpy(pi.nombre, "Monaco");               strcpy(pi.ubicacion, "Monaco");                 pi.distancia = 3.337f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id= 9; strcpy(pi.nombre, "Barcelona-Catalunya");  strcpy(pi.ubicacion, "Barcelona, Espana");      pi.distancia = 4.657f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=10; strcpy(pi.nombre, "Red Bull Ring");        strcpy(pi.ubicacion, "Spielberg, Austria");     pi.distancia = 4.318f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=11; strcpy(pi.nombre, "Silverstone");          strcpy(pi.ubicacion, "Silverstone, Gran Bretana"); pi.distancia = 5.891f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=12; strcpy(pi.nombre, "Hungaroring");          strcpy(pi.ubicacion, "Budapest, Hungria");      pi.distancia = 4.381f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=13; strcpy(pi.nombre, "Spa-Francorchamps");    strcpy(pi.ubicacion, "Spa, Belgica");           pi.distancia = 7.004f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=14; strcpy(pi.nombre, "Zandvoort");            strcpy(pi.ubicacion, "Zandvoort, Holanda");     pi.distancia = 4.259f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=15; strcpy(pi.nombre, "Monza");                strcpy(pi.ubicacion, "Monza, Italia");          pi.distancia = 5.793f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=16; strcpy(pi.nombre, "Baku");                 strcpy(pi.ubicacion, "Baku, Azerbaiyan");       pi.distancia = 6.003f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=17; strcpy(pi.nombre, "Marina Bay");           strcpy(pi.ubicacion, "Singapur");               pi.distancia = 4.940f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=18; strcpy(pi.nombre, "Circuit of the Americas"); strcpy(pi.ubicacion, "Austin, USA");         pi.distancia = 5.513f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=19; strcpy(pi.nombre, "Autodromo Hermanos Rodriguez"); strcpy(pi.ubicacion, "Mexico DF, Mexico"); pi.distancia = 4.304f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=20; strcpy(pi.nombre, "Interlagos");           strcpy(pi.ubicacion, "Sao Paulo, Brasil");      pi.distancia = 4.309f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=21; strcpy(pi.nombre, "Las Vegas");            strcpy(pi.ubicacion, "Las Vegas, USA");         pi.distancia = 6.201f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=22; strcpy(pi.nombre, "Losail");               strcpy(pi.ubicacion, "Lusail, Qatar");          pi.distancia = 5.380f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=23; strcpy(pi.nombre, "Yas Marina");           strcpy(pi.ubicacion, "Abu Dhabi, EAU");         pi.distancia = 5.281f; colPistas->pistas[colPistas->validos++] = pi;
+    pi.id=24; strcpy(pi.nombre, "Madrid");               strcpy(pi.ubicacion, "Madrid, Espana");         pi.distancia = 5.500f; colPistas->pistas[colPistas->validos++] = pi;
     // ========================
     // GUARDAR TODO
     // ========================
     guardarPilotos(pilotos, *cantPilotos);
     guardarEscuderias(escuderias, *cantEscuderias);
+    guardarPista(colPistas);
     *cantCarreras = 0;
     guardarCarreras(carreras, *cantCarreras);
 
@@ -156,55 +157,67 @@ void ordenarPilotosPorPuntaje(stPiloto pilotos[], int cantPilotos, stPiloto resu
 }
 
 // 2. Muestra la tabla de puntajes en pantalla
-void mostrarTablaDePuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias)
+void mostrarTablaPorCategoria(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias, int categoria)
 {
     stPiloto copia[MAX_PILOTOS];
     ordenarPilotosPorPuntaje(pilotos, cantPilotos, copia);
 
-    printf("\n=== TABLA DE PUNTAJES ===\n");
-    printf("%-5s %-30s %-20s %-10s %-10s\n", "Pos", "Piloto", "Escuderia", "Puntaje", "Cat");
-    printf("------------------------------------------------------------------------\n");
+    printf("\n=== TABLA DE PUNTAJES %s ===\n", categoria == 1 ? "F1" : "F2");
+    printf("%-5s %-30s %-20s %-10s\n", "Pos", "Piloto", "Escuderia", "Puntaje");
+    printf("--------------------------------------------------------------------\n");
 
+    int pos = 1;
     for (int i = 0; i < cantPilotos; i++)
     {
+        if (copia[i].categoria != categoria)
+            continue;
+
         int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, copia[i].idEscuderia);
-        printf("%-5d %-30s %-20s %-10d %-10s\n",
-               i + 1,
+        printf("%-5d %-30s %-20s %-10d\n",
+               pos++,
                copia[i].nombre,
                posEsc != -1 ? escuderias[posEsc].marca : "N/A",
-               copia[i].puntaje,
-               copia[i].categoria == 1 ? "F1" : "F2");
+               copia[i].puntaje);
     }
 }
 
 
-void exportarTablaDePuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias)
+void exportarTablaPorCategoria(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias, int categoria)
 {
-    stPiloto copia[MAX_PILOTOS];
-    ordenarPilotosPorPuntaje(pilotos, cantPilotos, copia);
+    char nombreArchivo[20];
+    if (categoria == 1)
+        strcpy(nombreArchivo, "tabla_f1.txt");
+    else
+        strcpy(nombreArchivo, "tabla_f2.txt");
 
-    FILE *archivo = fopen("puntajes.txt", "w");
+    FILE *archivo = fopen(nombreArchivo, "w");
     if (archivo == NULL)
     {
         printf("Error al crear el archivo.\n");
         return;
     }
 
-    fprintf(archivo, "=== TABLA DE PUNTAJES ===\n");
-    fprintf(archivo, "%-5s %-30s %-20s %-10s %-10s\n", "Pos", "Piloto", "Escuderia", "Puntaje", "Cat");
-    fprintf(archivo, "------------------------------------------------------------------------\n");
+    stPiloto copia[MAX_PILOTOS];
+    ordenarPilotosPorPuntaje(pilotos, cantPilotos, copia);
 
+    fprintf(archivo, "=== TABLA DE PUNTAJES %s ===\n", categoria == 1 ? "F1" : "F2");
+    fprintf(archivo, "%-5s %-30s %-20s %-10s\n", "Pos", "Piloto", "Escuderia", "Puntaje");
+    fprintf(archivo, "--------------------------------------------------------------------\n");
+
+    int pos = 1;
     for (int i = 0; i < cantPilotos; i++)
     {
+        if (copia[i].categoria != categoria)
+            continue;
+
         int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, copia[i].idEscuderia);
-        fprintf(archivo, "%-5d %-30s %-20s %-10d %-10s\n",
-                i + 1,
-                copia[i].nombre,
-                posEsc != -1 ? escuderias[posEsc].marca : "N/A",
-                copia[i].puntaje,
-                copia[i].categoria == 1 ? "F1" : "F2");
+        fprintf(archivo, "%-5d %-30s %-20s %-10d\n",
+               pos++,
+               copia[i].nombre,
+               posEsc != -1 ? escuderias[posEsc].marca : "N/A",
+               copia[i].puntaje);
     }
 
     fclose(archivo);
-    printf("Tabla exportada a puntajes.txt correctamente.\n");
+    printf("Tabla exportada a %s correctamente.\n", nombreArchivo);
 }

@@ -20,6 +20,6 @@ void cargarPista(stColeccionPistas *col);
 
 /// FUNCIONES DE ORDEN Y MUESTRA
 void ordenarPistasAlfabeticamente(stColeccionPistas *col, stPista pistasOrdenadas[]);
-void listarPistas(stColeccionPistas *col);
+void listarPistas(stPista pistasOrdenadas[], int cant);
 
 #endif // FORMULA_PISTAS_H_INCLUDED

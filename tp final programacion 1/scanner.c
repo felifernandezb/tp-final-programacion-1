@@ -147,10 +147,10 @@ int scanIdPista(stColeccionPistas *col)
         printf("ID de la pista: ");
         id = scanInt();
 
-        if (buscarPistaPorId(&col, &col->pistas, id) == -1)
+        if (buscarPistaPorId(col, id) == -1)
             printf("Pista no encontrada. Ingrese un ID valido.\n");
     }
-    while (buscarPistaPorId(pistas, &col->pistas, id) == -1);
+    while (buscarPistaPorId(col, id) == -1);
 
     return id;
 }

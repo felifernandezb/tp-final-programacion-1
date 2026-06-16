@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1781628779 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\main.c
+1781652149 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"formula_pilotos.h"
@@ -8,7 +8,7 @@
 	"formula_inicial.h"
 	"scanner.h"
 
-1781640347 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_carreras.c
+1781652091 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_carreras.c
 	<stdio.h>
 	<string.h>
 	"formula.h"
@@ -18,14 +18,14 @@
 
 1781633041 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula.h
 
-1781640162 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_carreras.h
+1781652090 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_carreras.h
 	"formula.h"
 	"formula_pistas.h"
 
-1781633011 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_pistas.h
+1781650201 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_pistas.h
 	"formula.h"
 
-1781638913 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_pistas.c
+1781650200 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_pistas.c
 	"formula_pistas.h"
 	<stdio.h>
 	<string.h>
@@ -39,7 +39,7 @@
 1781489814 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_pilotos.h
 	"formula.h"
 
-1781638640 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_inicial.c
+1781653890 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_inicial.c
 	"formula_inicial.h"
 	"formula_pilotos.h"
 	"formula_pistas.h"
@@ -47,7 +47,7 @@
 	<string.h>
 	<stdio.h>
 
-1781638559 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_inicial.h
+1781653890 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\formula_inicial.h
 	"formula.h"
 
 1781581008 source:c:\users\richard\documents\github\tp-final-programacion-1\tp final programacion 1\formula_carreras.c
@@ -161,7 +161,7 @@
 1781596193 c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\scanner.h
 	"formula.h"
 
-1781629173 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\scanner.c
+1781651564 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\scanner.c
 	"scanner.h"
 	<stdio.h>
 	<stdlib.h>
@@ -170,6 +170,6 @@
 	"formula_pilotos.h"
 	"formula_pistas.h"
 
-1781625989 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\scanner.h
+1781651457 c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\scanner.h
 	"formula.h"
 

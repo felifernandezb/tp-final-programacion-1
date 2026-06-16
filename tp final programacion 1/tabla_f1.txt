@@ -1,0 +1,25 @@
+=== TABLA DE PUNTAJES F1 ===
+Pos   Piloto                         Escuderia            Puntaje   
+--------------------------------------------------------------------
+1     Lando Norris                   McLaren              0         
+2     Oscar Piastri                  McLaren              0         
+3     Charles Leclerc                Ferrari              0         
+4     Lewis Hamilton                 Ferrari              0         
+5     Max Verstappen                 Red Bull             0         
+6     Isack Hadjar                   Red Bull             0         
+7     George Russell                 Mercedes             0         
+8     Kimi Antonelli                 Mercedes             0         
+9     Fernando Alonso                Aston Martin         0         
+10    Lance Stroll                   Aston Martin         0         
+11    Pierre Gasly                   Alpine               0         
+12    Franco Colapinto               Alpine               0         
+13    Esteban Ocon                   Haas                 0         
+14    Ollie Bearman                  Haas                 0         
+15    Liam Lawson                    Racing Bulls         0         
+16    Arvid Lindblad                 Racing Bulls         0         
+17    Alex Albon                     Williams             0         
+18    Carlos Sainz                   Williams             0         
+19    Nico Hulkenberg                Audi                 0         
+20    Gabriel Bortoleto              Audi                 0         
+21    Sergio Perez                   Cadillac             0         
+22    Valtteri Bottas                Cadillac             0         

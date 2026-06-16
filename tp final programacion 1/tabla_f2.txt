@@ -1,0 +1,25 @@
+=== TABLA DE PUNTAJES F2 ===
+Pos   Piloto                         Escuderia            Puntaje   
+--------------------------------------------------------------------
+1     Sebastian Montoya              Prema                0         
+2     Mari Boya                      Prema                0         
+3     Martinius Stenshorne           Rodin                0         
+4     Alexander Dunne                Rodin                0         
+5     Kush Maini                     ART Grand Prix       0         
+6     Tasanapol Inthraphuvasak       ART Grand Prix       0         
+7     Emerson Fittipaldi Jr.         AIX Racing           0         
+8     Cian Shields                   AIX Racing           0         
+9     Nicolas Varrone                Van Amersfoort       0         
+10    Rafael Villagomez              Van Amersfoort       0         
+11    Rafael Camara                  Invicta              0         
+12    Joshua Durksen                 Invicta              0         
+13    Colton Herta                   Hitech               0         
+14    Laurens van Hoepen             Trident              0         
+15    John Bennett                   Trident              0         
+16    Oliver Goether                 MP Motorsport        0         
+17    Gabriele Mini                  MP Motorsport        0         
+18    Nikola Tsolov                  Campos               0         
+19    Noel Leon                      Campos               0         
+20    Ritomo Miyata                  Hitech               0         
+21    Dino Beganovic                 DAMS                 0         
+22    Roman Bilinski                 DAMS                 0         
