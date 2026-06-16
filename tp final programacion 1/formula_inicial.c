@@ -141,26 +141,32 @@ void cargarDatosIniciales(stPiloto pilotos[], int *cantPilotos,
 
 }
 
-void exportarTablaAPuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias)
+// 1. Ordena los pilotos por puntaje de mayor a menor en el array 'resultado'
+void ordenarPilotosPorPuntaje(stPiloto pilotos[], int cantPilotos, stPiloto resultado[]) // Algoritmo sort.
 {
-    // Copiar y ordenar por puntaje de mayor a menor
-    stPiloto copia[MAX_PILOTOS];
     for (int i = 0; i < cantPilotos; i++)
-        copia[i] = pilotos[i];
+        resultado[i] = pilotos[i];
 
     for (int i = 0; i < cantPilotos - 1; i++)
         for (int j = i + 1; j < cantPilotos; j++)
-            if (copia[j].puntaje > copia[i].puntaje)
+            if (resultado[j].puntaje > resultado[i].puntaje)
             {
-                stPiloto temp = copia[i];
-                copia[i] = copia[j];
-                copia[j] = temp;
+                stPiloto temp = resultado[i];
+                resultado[i] = resultado[j];
+                resultado[j] = temp;
             }
+}
 
-    // Mostrar en pantalla
+// 2. Muestra la tabla de puntajes en pantalla
+void mostrarTablaDePuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias)
+{
+    stPiloto copia[MAX_PILOTOS];
+    ordenarPilotosPorPuntaje(pilotos, cantPilotos, copia);
+
     printf("\n=== TABLA DE PUNTAJES ===\n");
     printf("%-5s %-30s %-20s %-10s %-10s\n", "Pos", "Piloto", "Escuderia", "Puntaje", "Cat");
     printf("------------------------------------------------------------------------\n");
+
     for (int i = 0; i < cantPilotos; i++)
     {
         int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, copia[i].idEscuderia);
@@ -171,17 +177,25 @@ void exportarTablaAPuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia esc
                copia[i].puntaje,
                copia[i].categoria == 1 ? "F1" : "F2");
     }
+}
 
-    // Exportar a txt
-    FILE *archivo = fopen("puntajes.dat", "w");
+
+void exportarTablaDePuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias)
+{
+    stPiloto copia[MAX_PILOTOS];
+    ordenarPilotosPorPuntaje(pilotos, cantPilotos, copia);
+
+    FILE *archivo = fopen("puntajes.txt", "w");
     if (archivo == NULL)
     {
         printf("Error al crear el archivo.\n");
         return;
     }
+
     fprintf(archivo, "=== TABLA DE PUNTAJES ===\n");
     fprintf(archivo, "%-5s %-30s %-20s %-10s %-10s\n", "Pos", "Piloto", "Escuderia", "Puntaje", "Cat");
     fprintf(archivo, "------------------------------------------------------------------------\n");
+
     for (int i = 0; i < cantPilotos; i++)
     {
         int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, copia[i].idEscuderia);
@@ -192,6 +206,7 @@ void exportarTablaAPuntajes(stPiloto pilotos[], int cantPilotos, stEscuderia esc
                 copia[i].puntaje,
                 copia[i].categoria == 1 ? "F1" : "F2");
     }
+
     fclose(archivo);
     printf("Tabla exportada a puntajes.txt correctamente.\n");
 }

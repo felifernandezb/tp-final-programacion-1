@@ -4,6 +4,7 @@
 #include "formula_pistas.h"
 #include "formula_carreras.h"
 #include "formula_inicial.h"
+#include "scanner.h"
 
 int main()
 {
@@ -36,7 +37,7 @@ int main()
 
         printf("0. Salir\n");
         printf("Opcion: ");
-        scanf("%d", &opcion);
+        opcion = scanInt();
 
         switch (opcion)
         {
@@ -51,7 +52,7 @@ int main()
                 printf("4. Eliminar piloto\n");
                 printf("0. Volver\n");
                 printf("Opcion: ");
-                scanf("%d", &opPiloto);
+                opPiloto = scanInt();
 
                 switch (opPiloto)
                 {
@@ -73,8 +74,14 @@ int main()
                     stPiloto nuevo;
                     nuevo.id = generarIdPiloto(pilotos, cantPilotos);
 
-                    printf("Categoria (1=F1, 2=F2): ");
-                    scanf("%d", &nuevo.categoria);
+                    do
+                    {
+                        printf("Categoria: (1=F1, 2=F2): ");
+                        nuevo.categoria = scanInt();
+                        if (nuevo.categoria != 1 && nuevo.categoria != 2)
+                            printf("Categoria invalida. Ingrese 1 para F1 o 2 para F2. \n");
+                    }
+                    while (nuevo.categoria != 1 && nuevo.categoria != 2);
 
                     if (!hayEscuderiaDisponible(escuderias, cantEscuderias, nuevo.categoria))
                     {
@@ -85,10 +92,10 @@ int main()
                     listarEscuderiasDisponibles(escuderias, cantEscuderias, nuevo.categoria);
 
                     printf("Nombre: ");
-                    scanf(" %49[^\n]", nuevo.nombre);
+                    scanString(nuevo.nombre, 50);
 
                     printf("ID Escuderia: ");
-                    scanf("%d", &nuevo.idEscuderia);
+                    nuevo.idEscuderia = scanInt();
 
                     nuevo.puntaje = 0;
 
@@ -128,15 +135,21 @@ int main()
 
                     int id;
                     printf("ID del piloto a modificar: ");
-                    scanf("%d", &id);
+                    id = scanInt();
 
                     stPiloto actualizado;
                     printf("Nuevo nombre: ");
-                    scanf(" %49[^\n]", actualizado.nombre);
-                    printf("Nueva categoria (1=F1, 2=F2): ");
-                    scanf("%d", &actualizado.categoria);
+                    scanString(actualizado.nombre, 50);
+                    do
+                    {
+                        printf("Nueva categoria (1=F1, 2=F2): ");
+                        actualizado.categoria = scanInt();
+                        if (actualizado.categoria != 1 && actualizado.categoria != 2)
+                            printf("Categoria invalida. Ingrese 1 para F1 o 2 para F2. \n");
+                    }
+                    while (actualizado.categoria != 1 && actualizado.categoria != 2);
                     printf("Nuevo puntaje: ");
-                    scanf("%d", &actualizado.puntaje);
+                    actualizado.puntaje = scanInt();
 
                     if (modificarPiloto(pilotos, cantPilotos, id, actualizado))
                         printf("Piloto modificado correctamente.\n");
@@ -152,7 +165,7 @@ int main()
 
                     int id;
                     printf("ID del piloto a eliminar: ");
-                    scanf("%d", &id);
+                    id = scanInt();
 
                     int pos = buscarPilotoPorId(pilotos, cantPilotos, id);
                     if (pos != -1)
@@ -195,7 +208,7 @@ int main()
                 printf("4. Eliminar escuderia\n");
                 printf("0. Volver\n");
                 printf("Opcion: ");
-                scanf("%d", &opEscuderia);
+                opEscuderia = scanInt();
 
                 switch (opEscuderia)
                 {
@@ -219,11 +232,18 @@ int main()
                     nueva.idPiloto2 = -1;
 
                     printf("Marca: ");
-                    scanf(" %49[^\n]", nueva.marca); // lee hasta 49 caracteres ([^\n] significa "todo hasta que encuentre un enter")
+                    scanString(nueva.marca, 50);
                     printf("Sponsor: ");
-                    scanf(" %49[^\n]", nueva.sponsor);
-                    printf("Categoria: ");
-                    scanf("%d\n", nueva.categoria);
+                    scanString(nueva.sponsor, 50);
+                    do
+                    {
+                        printf("Categoria: (1=F1, 2=F2): ");
+                        nueva.categoria = scanInt();
+                        if (nueva.categoria != 1 && nueva.categoria != 2)
+                            printf("Categoria invalida. Ingrese 1 para F1 o 2 para F2. \n");
+                    }
+                    while (nueva.categoria != 1 && nueva.categoria != 2);
+
 
                     if (registrarEscuderia(escuderias, &cantEscuderias, nueva))
                         printf("Escuderia registrada correctamente.\n");
@@ -239,13 +259,13 @@ int main()
 
                     int id;
                     printf("ID de la escuderia a modificar: ");
-                    scanf("%d", &id);
+                    id = scanInt();
 
                     stEscuderia actualizada;
                     printf("Nueva marca: ");
-                    scanf(" %49[^\n]", actualizada.marca);
+                    scanString(actualizada.marca, 50);
                     printf("Nuevo sponsor: ");
-                    scanf(" %49[^\n]", actualizada.sponsor);
+                    scanString(actualizada.sponsor, 50);
 
                     if (modificarEscuderia(escuderias, cantEscuderias, id, actualizada, pilotos, cantPilotos))
                         printf("Escuderia modificada correctamente.\n");
@@ -261,12 +281,12 @@ int main()
 
                     int id;
                     printf("ID de la escuderia a eliminar: ");
-                    scanf("%d", &id);
+                    id = scanInt();
                     int confirma = -1;
                     while (confirma != 1 && confirma != 0)
                     {
                         printf("Esto eliminara tambien sus pilotos. Confirma? (1=Si, 0=No): ");
-                        scanf("%d", &confirma);
+                        confirma = scanInt();
                         if (confirma != 1 && confirma != 0)
                             printf("Error, numero no valido, intente nuevamente.\n");
 
@@ -291,7 +311,6 @@ int main()
             while (opEscuderia != 0);
             break;
         }
-        break;
         case 3:
         {
             int opPista;
@@ -304,7 +323,7 @@ int main()
                 printf("4. Eliminar pista\n");
                 printf("0. Volver\n");
                 printf("Opcion: ");
-                scanf("%d", &opPista);
+                opPista = scanInt();
 
                 switch (opPista)
                 {
@@ -326,11 +345,11 @@ int main()
                     nueva.id = generarIDPista(pistas, cantPistas);
 
                     printf("Nombre: ");
-                    scanf(" %49[^\n]", nueva.nombre);
+                    scanString(nueva.nombre, 50);
                     printf("Ubicacion: ");
-                    scanf(" %99[^\n]", nueva.ubicacion);
+                    scanString(nueva.ubicacion, 100);
                     printf("Distancia (km): ");
-                    scanf("%f", &nueva.distancia);
+                    nueva.distancia = scanFloat();
 
                     if (registrarPista(pistas, &cantPistas, nueva))
                         printf("Pista registrada correctamente.\n");
@@ -346,15 +365,15 @@ int main()
 
                     int id;
                     printf("ID de la pista a modificar: ");
-                    scanf("%d", &id);
+                    id = scanInt();
 
                     stPista actualizada;
                     printf("Nuevo nombre: ");
-                    scanf(" %49[^\n]", actualizada.nombre);
+                    scanString(actualizada.nombre, 50);
                     printf("Nueva ubicacion: ");
-                    scanf(" %99[^\n]", actualizada.ubicacion);
+                    scanString(actualizada.ubicacion, 100);
                     printf("Nueva distancia (km): ");
-                    scanf("%f", &actualizada.distancia);
+                    actualizada.distancia = scanFloat();
 
                     if (modificarPista(pistas, cantPistas, id, actualizada))
                         printf("Pista modificada correctamente.\n");
@@ -370,7 +389,7 @@ int main()
 
                     int id;
                     printf("ID de la pista a eliminar: ");
-                    scanf("%d", &id);
+                    id = scanInt();
 
                     if (eliminarPista(pistas, &cantPistas, id))
                         printf("Pista eliminada correctamente.\n");
@@ -401,7 +420,7 @@ int main()
                 printf("6. Carreras en una pista\n");
                 printf("0. Volver\n");
                 printf("Opcion: ");
-                scanf("%d", &opCarrera);
+                opCarrera = scanInt();
 
                 switch (opCarrera)
                 {
@@ -422,17 +441,9 @@ int main()
                     nueva.id = generarIdCarrera(carreras, cantCarreras);
 
                     listarPistas(pistas, cantPistas);
-                    printf("ID de la pista: ");
-                    scanf("%d", &nueva.idPista);
+                    nueva.idPista = scanIdPista(pistas, cantPistas);
 
-                    if (buscarPistaPorId(pistas, cantPistas, nueva.idPista) == -1)
-                    {
-                        printf("Pista no encontrada.\n");
-                        break;
-                    }
-
-                    printf("Fecha (dia mes anio): ");
-                    scanf("%d %d %d", &nueva.fecha.dia, &nueva.fecha.mes, &nueva.fecha.anio);
+                    scanFecha(&nueva.fecha);
 
                     if (hayChoqueFechas(carreras, cantCarreras, nueva.idPista, nueva.fecha))
                     {
@@ -440,21 +451,24 @@ int main()
                         break;
                     }
 
-                    printf("Vueltas: ");
-                    scanf("%d", &nueva.vueltas);
+                    do
+                    {
+                        printf("Vueltas: ");
+                        nueva.vueltas = scanInt();
+
+                        if (nueva.vueltas < 44 || nueva.vueltas > 78) /// Tomamos de referencia a la carrera con menos vueltas (GP de Bélgica) y la que más tiene (GP de Mónaco).
+                            printf("Error. Las vueltas no pueden ser menores que 44 ni mayores a 78.\n");
+                    }
+                    while (nueva.vueltas < 44 || nueva.vueltas > 78);
 
                     listarPilotos(pilotos, cantPilotos, escuderias, cantEscuderias);
-                    printf("ID piloto 1er lugar: ");
-                    scanf("%d", &nueva.podio[0]);
-                    printf("ID piloto 2do lugar: ");
-                    scanf("%d", &nueva.podio[1]);
-                    printf("ID piloto 3er lugar: ");
-                    scanf("%d", &nueva.podio[2]);
+                    nueva.podio[0] = scanIdPiloto(pilotos, cantPilotos, "ID piloto 1er lugar: ");
+                    nueva.podio[1] = scanIdPiloto(pilotos, cantPilotos, "ID piloto 2do lugar: ");
+                    nueva.podio[2] = scanIdPiloto(pilotos, cantPilotos, "ID piloto 3er lugar: ");
 
-                    printf("ID piloto vuelta rapida: ");
-                    scanf("%d", &nueva.vueltaRapida.idPiloto);
+                    nueva.vueltaRapida.idPiloto = scanIdPiloto(pilotos, cantPilotos, "ID piloto vuelta rapida: ");
                     printf("Tiempo vuelta rapida (min seg ms): ");
-                    scanf("%d %d %d", &nueva.vueltaRapida.minutos,
+                    scanf("%d %d %d", &nueva.vueltaRapida.minutos, /// Aplicamos scanf porque se nos hizo más práctico.
                           &nueva.vueltaRapida.segundos,
                           &nueva.vueltaRapida.milisegundos);
 
@@ -480,32 +494,41 @@ int main()
                 {
                     listarCarreras(carreras, cantCarreras, pistas, cantPistas, pilotos, cantPilotos);
 
-                    int id;
                     printf("ID de la carrera a modificar: ");
-                    scanf("%d", &id);
+                    int id = scanInt();
+
+                    if (buscarCarreraPorId(carreras, cantCarreras, id) == -1)
+                    {
+                        printf("Carrera no encontrada.\n");
+                        break;
+                    }
+
                     stCarrera nueva;
                     nueva.id = id;
 
                     listarPistas(pistas, cantPistas);
-                    printf("ID de la pista: ");
-                    scanf("%d", &nueva.idPista);
-                    printf("Fecha (dia mes anio): ");
-                    scanf("%d %d %d", &nueva.fecha.dia, &nueva.fecha.mes, &nueva.fecha.anio);
-                    printf("Vueltas: ");
-                    scanf("%d", &nueva.vueltas);
+                    nueva.idPista = scanIdPista(pistas, cantPistas);
+
+                    scanFecha(&nueva.fecha);
+
+                    do
+                    {
+                        printf("Vueltas: ");
+                        nueva.vueltas = scanInt();
+                        if (nueva.vueltas < 44 || nueva.vueltas > 78)
+                            printf("Error. Las vueltas no pueden ser menores que 44 ni mayores a 78.\n");
+                    }
+                    while (nueva.vueltas < 44 || nueva.vueltas > 78);
 
                     listarPilotos(pilotos, cantPilotos, escuderias, cantEscuderias);
-                    printf("ID piloto 1er lugar: ");
-                    scanf("%d", &nueva.podio[0]);
-                    printf("ID piloto 2do lugar: ");
-                    scanf("%d", &nueva.podio[1]);
-                    printf("ID piloto 3er lugar: ");
-                    scanf("%d", &nueva.podio[2]);
+                    nueva.podio[0] = scanIdPiloto(pilotos, cantPilotos, "ID piloto 1er lugar: ");
+                    nueva.podio[1] = scanIdPiloto(pilotos, cantPilotos, "ID piloto 2do lugar: ");
+                    nueva.podio[2] = scanIdPiloto(pilotos, cantPilotos, "ID piloto 3er lugar: ");
 
                     printf("ID piloto vuelta rapida: ");
-                    scanf("%d", &nueva.vueltaRapida.idPiloto);
+                    nueva.vueltaRapida.idPiloto = scanInt();
                     printf("Tiempo vuelta rapida (min seg ms): ");
-                    scanf("%d %d %d", &nueva.vueltaRapida.minutos,
+                    scanf("%d %d %d", &nueva.vueltaRapida.minutos, /// Aplicamos scanf porque se nos hizo más práctico.
                           &nueva.vueltaRapida.segundos,
                           &nueva.vueltaRapida.milisegundos);
 
@@ -521,7 +544,7 @@ int main()
 
                     int id;
                     printf("ID de la carrera a eliminar: ");
-                    scanf("%d", &id);
+                    id = scanInt();
 
                     if (eliminarCarrera(carreras, &cantCarreras, id))
                         printf("Carrera eliminada correctamente.\n");
@@ -537,7 +560,7 @@ int main()
 
                     int id;
                     printf("ID del piloto: ");
-                    scanf("%d", &id);
+                    id = scanInt();
 
                     if (buscarPilotoPorId(pilotos, cantPilotos, id) == -1)
                     {
@@ -556,7 +579,7 @@ int main()
 
                     int id;
                     printf("ID de la pista: ");
-                    scanf("%d", &id);
+                    id = scanInt();
 
                     if (buscarPistaPorId(pistas, cantPistas, id) == -1)
                     {
@@ -578,8 +601,31 @@ int main()
         }
         case 5:
         {
-            exportarTablaAPuntajes(pilotos, cantPilotos, escuderias, cantEscuderias);
-            printf("Tabla exportada con exito.");
+            int opPuntajes;
+            do
+            {
+                printf("\n=== TABLA DE PUNTAJES ===\n");
+                printf("1. Ver tabla en pantalla\n");
+                printf("2. Exportar tabla a .txt\n");
+                printf("0. Volver\n");
+                printf("Opcion: ");
+                opPuntajes = scanInt();
+
+                switch (opPuntajes)
+                {
+                case 1:
+                    mostrarTablaDePuntajes(pilotos, cantPilotos, escuderias, cantEscuderias);
+                    break;
+                case 2:
+                    exportarTablaDePuntajes(pilotos, cantPilotos, escuderias, cantEscuderias);
+                    break;
+                case 0:
+                    break;
+                default:
+                    printf("Opcion invalida.\n");
+                }
+            }
+            while (opPuntajes != 0);
             break;
         }
         case 6:
@@ -595,7 +641,7 @@ int main()
         }
 
         case 0:
-            printf("Saliendo...\n");
+            printf("Saliendo del gestor de Formula 1...\n");
             break;
         default:
             printf("Opcion invalida.\n");

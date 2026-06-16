@@ -120,7 +120,7 @@ void listarCarreras(stCarrera carrera[], int cant, stPista pista[], int cantPist
         printf("%-6d %-20s %-20s %-15s %-15s %-15s\n",
                carrera[i].id,
                fecha,
-               pista[posPista].nombre,
+               posPista != -1 ? pista[posPista].nombre : "Desconocida",
                pos1 != -1 ? pilotos[pos1].nombre : "N/A",
                pos2 != -1 ? pilotos[pos2].nombre : "N/A",
                pos3 != -1 ? pilotos[pos3].nombre : "N/A");
@@ -178,8 +178,8 @@ void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int 
         return;
     }
 
-    printf("%-6s %-30s %-20s %-10s %-10s %-10s\n", "ID", "Fecha", "Pista", "1ro", "2ro", "3ro");
-    printf("--------------------------------------------------------------------\n");
+    printf("%-6s %-15s %-20s %-20s %-20s %-20s\n", "ID", "Fecha", "Pista", "1ro", "2ro", "3ro");
+    printf("-------------------------------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < cant; i++)
     {
@@ -188,10 +188,12 @@ void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int 
                 carrera[i].podio[2] == idPiloto ||
                 carrera[i].vueltaRapida.idPiloto == idPiloto)
         {
+            // 1. Buscamos la pista y VALIDAMOS que exista (evita el crash si está en 0)
             int posPista = buscarPistaPorId(pista, cantPistas, carrera[i].idPista);
 
             char fecha[15];
             sprintf(fecha, "%02d/%02d/%04d", carrera[i].fecha.dia, carrera[i].fecha.mes, carrera[i].fecha.anio);
+
             int pos1 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[0]);
             int pos2 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[1]);
             int pos3 = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].podio[2]);
@@ -199,23 +201,24 @@ void listarCarrerasDePiloto(stCarrera carrera[], int cant, stPista pista[], int 
             printf("%-6d %-15s %-20s %-20s %-20s %-20s\n",
                    carrera[i].id,
                    fecha,
-                   pista[posPista].nombre,
+                   posPista != -1 ? pista[posPista].nombre : "Desconocida", // Agregada validación aquí
                    pos1 != -1 ? pilotos[pos1].nombre : "N/A",
                    pos2 != -1 ? pilotos[pos2].nombre : "N/A",
                    pos3 != -1 ? pilotos[pos3].nombre : "N/A");
-
+            // 2. Mostrar la vuelta rápida con el nombre del piloto
             if (carrera[i].vueltaRapida.idPiloto == idPiloto)
             {
-                printf("  Vuelta rapida: %d:%02d:%03d\n",
+                // Buscamos la posición del piloto de la vuelta rápida
+                int posVR = buscarPilotoPorId(pilotos, cantPilotos, carrera[i].vueltaRapida.idPiloto);
+
+                printf("  Vuelta rapida de %s: %d:%02d:%03d\n",
+                       posVR != -1 ? pilotos[posVR].nombre : "Piloto Desconocido", // Muestra el nombre
                        carrera[i].vueltaRapida.minutos,
                        carrera[i].vueltaRapida.segundos,
                        carrera[i].vueltaRapida.milisegundos);
             }
-
-
         }
     }
-
 }
 
 int hayChoqueFechas(stCarrera carrera[], int cant, int idPista, stFecha fecha)
@@ -264,8 +267,3 @@ int modificarCarrera(stCarrera carrera[], int *cant, int id, stCarrera nueva)
 
     return 1;
 }
-
-
-
-
-

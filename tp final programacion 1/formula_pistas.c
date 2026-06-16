@@ -87,9 +87,9 @@ void guardarPista (stPista pistas[], int cant)
 {
     FILE *archi = fopen("pistas.dat", "wb");
 
-    if (archi == 0)
+    if (archi == NULL)
     {
-        printf("El archivo no se pudo abrir.");
+        printf("El archivo no se pudo abrir.\n");
         return;
     }
 
@@ -107,7 +107,7 @@ void cargarPista (stPista pistas[], int *cant)
 {
     FILE *archi = fopen("pistas.dat", "rb");
 
-    if (archi == 0)
+    if (archi == NULL)
     {
         *cant = 0;
         return;
@@ -148,11 +148,11 @@ void listarPistas (stPista pistas[], int cant)
 {
     if (cant == 0)
     {
-        printf("No hay datos guardados.");
+        printf("No hay datos guardados.\n");
         return;
     }
 
-    printf("%-5s %-30s %-30s %-10s\n", "ID", "Nombre", "Ubicacion", "Distancia (k/m)");
+    printf("%-5s %-30s %-30s %-10s\n", "ID", "Nombre", "Ubicacion", "Distancia (km)");
     printf("---------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < cant; i++)

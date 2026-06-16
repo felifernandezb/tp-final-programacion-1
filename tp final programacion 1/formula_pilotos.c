@@ -123,7 +123,7 @@ void listarPilotos(stPiloto pilotos[], int cant, stEscuderia escuderias[], int c
     }
 
     printf("%-5s %-30s %-20s %-10s %-10s\n", "ID", "Nombre", "Escuderia", "Puntaje", "Categoria");
-    printf("--------------------------------------------------------------------\n");
+    printf("--------------------------------------------------------------------------------\n");
 
     for (int i = 0; i < cant; i++)
     {
@@ -132,7 +132,7 @@ void listarPilotos(stPiloto pilotos[], int cant, stEscuderia escuderias[], int c
         printf("%-5d %-30s %-20s %-10d %-10s\n",
             pilotos[i].id,
             pilotos[i].nombre,
-            escuderias[posEsc].marca,
+            posEsc != -1 ? escuderias[posEsc].marca : "N/A",
             pilotos[i].puntaje,
             pilotos[i].categoria == 1 ? "F1" : "F2");
     }
