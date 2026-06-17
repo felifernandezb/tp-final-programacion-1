@@ -145,23 +145,36 @@ int main()
                     id = scanInt();
 
                     stPiloto actualizado;
+                    actualizado.id = id;
+                    actualizado.puntaje = pilotos[buscarPilotoPorId(pilotos, cantPilotos, id)].puntaje;
+
                     printf("Nuevo nombre: ");
                     scanString(actualizado.nombre, 50);
+
                     do
                     {
                         printf("Nueva categoria (1=F1, 2=F2): ");
                         actualizado.categoria = scanInt();
                         if (actualizado.categoria != 1 && actualizado.categoria != 2)
-                            printf("Categoria invalida. Ingrese 1 para F1 o 2 para F2. \n");
+                            printf("Categoria invalida.\n");
                     }
                     while (actualizado.categoria != 1 && actualizado.categoria != 2);
-                    printf("Nuevo puntaje: ");
-                    actualizado.puntaje = scanInt();
 
-                    if (modificarPiloto(pilotos, cantPilotos, id, actualizado))
+                    listarEscuderiasDisponibles(escuderias, cantEscuderias, actualizado.categoria);
+                    printf("ID nueva escuderia: ");
+                    actualizado.idEscuderia = scanInt();
+
+                    int resultado = modificarPilotoCompleto(pilotos, cantPilotos, escuderias, cantEscuderias, id, actualizado);
+                    if (resultado == 1)
                         printf("Piloto modificado correctamente.\n");
-                    else
+                    else if (resultado == 0)
                         printf("Piloto no encontrado.\n");
+                    else if (resultado == -1)
+                        printf("Escuderia no encontrada.\n");
+                    else if (resultado == -2)
+                        printf("La escuderia no corresponde a esa categoria.\n");
+                    else if (resultado == -3)
+                        printf("La escuderia ya tiene dos pilotos.\n");
                     break;
                 }
                 case 4:

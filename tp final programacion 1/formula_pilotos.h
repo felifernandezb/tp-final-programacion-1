@@ -9,6 +9,7 @@
 
 int registrarPiloto(stPiloto pilotos[], int *cant, stPiloto nuevo);
 int modificarPiloto(stPiloto pilotos[], int cant, int id, stPiloto actualizado);
+int modificarPilotoCompleto(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias, int id, stPiloto actualizado);
 int eliminarPiloto(stPiloto pilotos[], int *cant, int id);
 void listarPilotos(stPiloto pilotos[], int cant, stEscuderia escuderias[], int cantEscuderias);
 int buscarPilotoPorId(stPiloto pilotos[], int cant, int id);

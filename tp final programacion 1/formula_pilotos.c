@@ -162,6 +162,63 @@ void cargarPilotos(stPiloto pilotos[], int *cant)
     fclose(archivo);
 }
 
+int modificarPiloto(stPiloto pilotos[], int cant, int id, stPiloto actualizado)
+{
+    // Buscar la posición del piloto
+    int pos = buscarPilotoPorId(pilotos, cant, id);
+    // Si no existe, devolver 0
+    if (pos == -1)
+        return 0;
+
+    // Conservar tanto el ID original como el ID de la escudería original y reemplazar el resto
+    actualizado.id = id;
+    actualizado.idEscuderia = pilotos[pos].idEscuderia;
+
+    pilotos[pos] = actualizado;
+
+    // Persistir cambios en el archivo
+    guardarPilotos(pilotos, cant);
+
+    return 1;
+}
+
+int modificarPilotoCompleto(stPiloto pilotos[], int cantPilotos, stEscuderia escuderias[], int cantEscuderias, int id, stPiloto actualizado)
+{
+    int pos = buscarPilotoPorId(pilotos, cantPilotos, id);
+    if (pos == -1)
+        return 0;
+
+    int posEscNueva = buscarEscuderiaPorId(escuderias, cantEscuderias, actualizado.idEscuderia);
+    if (posEscNueva == -1)
+        return -1;
+
+    if (escuderias[posEscNueva].categoria != actualizado.categoria)
+        return -2;
+
+    if (escuderias[posEscNueva].idPiloto1 != -1 && escuderias[posEscNueva].idPiloto2 != -1)
+        return -3;
+
+    // Liberar lugar en escuderia anterior
+    int posEscVieja = buscarEscuderiaPorId(escuderias, cantEscuderias, pilotos[pos].idEscuderia);
+    if (posEscVieja != -1)
+    {
+        if (escuderias[posEscVieja].idPiloto1 == id)
+            escuderias[posEscVieja].idPiloto1 = -1;
+        else if (escuderias[posEscVieja].idPiloto2 == id)
+            escuderias[posEscVieja].idPiloto2 = -1;
+    }
+
+    // Asignar a nueva escuderia
+    if (escuderias[posEscNueva].idPiloto1 == -1)
+        escuderias[posEscNueva].idPiloto1 = id;
+    else
+        escuderias[posEscNueva].idPiloto2 = id;
+
+    guardarEscuderias(escuderias, cantEscuderias);
+    modificarPiloto(pilotos, cantPilotos, id, actualizado);
+    return 1;
+}
+
 // ====================
 // FUNCIONES ESCUDERIAS
 // ====================
