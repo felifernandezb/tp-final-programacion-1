@@ -229,8 +229,9 @@ int modificarPilotoCompleto(stPiloto pilotos[], int cantPilotos, stEscuderia esc
 // FUNCIONES ESCUDERIAS
 // ====================
 
-void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categoria, int idEscudActual)
+int listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categoria, int idEscudActual)
 {
+    int contador = 0;
     printf("%-5s %-30s %-20s %-10s\n", "ID", "Marca", "Sponsor", "Lugares");
     printf("------------------------------------------------------------\n");
     for (int i = 0; i < cant; i++)
@@ -238,8 +239,9 @@ void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categor
         if (escuderias[i].categoria != categoria)
             continue;
 
-        int esSuEscuderia = (escuderias[i].id == idEscudActual);
+
         int lugares = 0;
+        int esSuEscuderia = (escuderias[i].id == idEscudActual);
         if (escuderias[i].idPiloto1 == -1) lugares++;
         if (escuderias[i].idPiloto2 == -1) lugares++;
 
@@ -255,7 +257,9 @@ void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categor
                    escuderias[i].marca,
                    escuderias[i].sponsor,
                    "actual");
+                   contador++;
     }
+    return contador;
 }
 
 int generarIdEscuderia(stEscuderia escuderias[], int cant)

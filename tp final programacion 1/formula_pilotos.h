@@ -35,7 +35,7 @@ void guardarEscuderias(stEscuderia escuderias[], int cant);
 void cargarEscuderias(stEscuderia escuderias[], int *cant);
 
 int hayEscuderiaDisponible(stEscuderia escuderias[], int cant, int categoria);
-void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categoria, int idEscudActual);
+int listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categoria, int idEscudActual);
 void ordenarEscuderiasAlfabeticamente(stEscuderia escuderias[], int cant, stEscuderia resultado[]);
 
 

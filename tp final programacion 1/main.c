@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "formula_pilotos.h"
 #include "formula_pistas.h"
 #include "formula_carreras.h"
@@ -136,20 +137,21 @@ int main()
                 }
                 case 3:
                 {
-                    stPiloto copia[MAX_PILOTOS];
-                    ordenarPilotosAlfabeticamente(pilotos, cantPilotos, copia);
-                    listarPilotos(copia, cantPilotos, escuderias, cantEscuderias);
+                        stPiloto copia[MAX_PILOTOS];
+                        ordenarPilotosAlfabeticamente(pilotos, cantPilotos, copia);
+                        listarPilotos(copia, cantPilotos, escuderias, cantEscuderias);
 
-                    int id;
-                    printf("ID del piloto a modificar: ");
-                    id = scanInt();
+                        int id;
+                        printf("ID del piloto a modificar: ");
+                        id = scanInt();
 
-                    stPiloto actualizado;
-                    actualizado.id = id;
-                    actualizado.puntaje = pilotos[buscarPilotoPorId(pilotos, cantPilotos, id)].puntaje;
+                        stPiloto actualizado;
+                        actualizado.id = id;
+                        actualizado.puntaje = pilotos[buscarPilotoPorId(pilotos, cantPilotos, id)].puntaje;
 
-                    printf("Nuevo nombre: ");
-                    scanString(actualizado.nombre, 50);
+                        printf("Nuevo nombre: ");
+                        scanString(actualizado.nombre, 50);
+                        actualizado.nombre[0] = toupper(actualizado.nombre[0]);
 
                     do
                     {
@@ -161,11 +163,15 @@ int main()
                     while (actualizado.categoria != 1 && actualizado.categoria != 2);
 
                     int posPiloto = buscarPilotoPorId(pilotos, cantPilotos, id);
-                    listarEscuderiasDisponibles(escuderias, cantEscuderias, actualizado.categoria, pilotos[posPiloto].idEscuderia);
 
+                    int hayDisponibles;
+
+                    hayDisponibles = listarEscuderiasDisponibles(escuderias, cantEscuderias, actualizado.categoria, pilotos[posPiloto].idEscuderia);
+
+                    if (hayDisponibles != 0)
+                    {
                     printf("ID nueva escuderia: ");
                     actualizado.idEscuderia = scanInt();
-
                     int resultado = modificarPilotoCompleto(pilotos, cantPilotos, escuderias, cantEscuderias, id, actualizado);
                     if (resultado == 1)
                         printf("Piloto modificado correctamente.\n");
@@ -177,6 +183,10 @@ int main()
                         printf("La escuderia no corresponde a esa categoria.\n");
                     else if (resultado == -3)
                         printf("La escuderia ya tiene dos pilotos.\n");
+                    }
+                    else
+                    puts("No hay escuderias disponibles en la categoria seleccionada.\n");
+
                     break;
                 }
                 case 4:
