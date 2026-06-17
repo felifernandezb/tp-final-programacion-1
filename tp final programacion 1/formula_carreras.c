@@ -134,7 +134,7 @@ void listarCarreras(stCarrera carrera[], int cant, stColeccionPistas *col, stPil
     }
 }
 
-void listarCarrerasDePista(stCarrera carrera[], int cant, stColeccionPistas *col , int idPista, stPiloto pilotos[], int cantPilotos)
+void listarCarrerasDePista(stCarrera carrera[], int cant, stColeccionPistas *col, int idPista, stPiloto pilotos[], int cantPilotos)
 {
     if (cant == 0)
     {
@@ -239,13 +239,13 @@ int hayChoqueFechasPiloto(stCarrera carrera[], int cant, int idPiloto, stFecha f
     for (int i = 0; i < cant; i++)
     {
         if (carrera[i].fecha.dia == fecha.dia &&
-            carrera[i].fecha.mes == fecha.mes &&
-            carrera[i].fecha.anio == fecha.anio)
+                carrera[i].fecha.mes == fecha.mes &&
+                carrera[i].fecha.anio == fecha.anio)
         {
             if (carrera[i].podio[0] == idPiloto ||
-                carrera[i].podio[1] == idPiloto ||
-                carrera[i].podio[2] == idPiloto ||
-                carrera[i].vueltaRapida.idPiloto == idPiloto)
+                    carrera[i].podio[1] == idPiloto ||
+                    carrera[i].podio[2] == idPiloto ||
+                    carrera[i].vueltaRapida.idPiloto == idPiloto)
                 return 1;
         }
     }
@@ -259,8 +259,10 @@ int eliminarCarrera(stCarrera carrera[], int *cant, int id)
     {
         return 0;
     }
-    carrera[pos] = carrera[*cant - 1];
+    for (int i = pos; i < *cant - 1; i++)
+        carrera[i] = carrera[i + 1];
     (*cant)--;
+
     guardarCarreras(carrera, *cant);
 
     return 1;

@@ -111,11 +111,11 @@ void listarPilotos(stPiloto pilotos[], int cant, stEscuderia escuderias[], int c
         int posEsc = buscarEscuderiaPorId(escuderias, cantEscuderias, pilotos[i].idEscuderia);
 
         printf("%-5d %-30s %-20s %-10d %-10s\n",
-            pilotos[i].id,
-            pilotos[i].nombre,
-            posEsc != -1 ? escuderias[posEsc].marca : "N/A",
-            pilotos[i].puntaje,
-            pilotos[i].categoria == 1 ? "F1" : "F2");
+               pilotos[i].id,
+               pilotos[i].nombre,
+               posEsc != -1 ? escuderias[posEsc].marca : "N/A",
+               pilotos[i].puntaje,
+               pilotos[i].categoria == 1 ? "F1" : "F2");
     }
 }
 
@@ -188,33 +188,39 @@ int modificarPilotoCompleto(stPiloto pilotos[], int cantPilotos, stEscuderia esc
     if (pos == -1)
         return 0;
 
+    int mismaEscuderia = (pilotos[pos].idEscuderia == actualizado.idEscuderia);
+
     int posEscNueva = buscarEscuderiaPorId(escuderias, cantEscuderias, actualizado.idEscuderia);
     if (posEscNueva == -1)
         return -1;
-
     if (escuderias[posEscNueva].categoria != actualizado.categoria)
         return -2;
 
-    if (escuderias[posEscNueva].idPiloto1 != -1 && escuderias[posEscNueva].idPiloto2 != -1)
-        return -3;
-
-    // Liberar lugar en escuderia anterior
-    int posEscVieja = buscarEscuderiaPorId(escuderias, cantEscuderias, pilotos[pos].idEscuderia);
-    if (posEscVieja != -1)
+    // Solo validar cupo si es una escudería distinta
+    if (!mismaEscuderia)
     {
-        if (escuderias[posEscVieja].idPiloto1 == id)
-            escuderias[posEscVieja].idPiloto1 = -1;
-        else if (escuderias[posEscVieja].idPiloto2 == id)
-            escuderias[posEscVieja].idPiloto2 = -1;
+        if (escuderias[posEscNueva].idPiloto1 != -1 && escuderias[posEscNueva].idPiloto2 != -1)
+            return -3;
+
+        // Liberar lugar en escudería anterior
+        int posEscVieja = buscarEscuderiaPorId(escuderias, cantEscuderias, pilotos[pos].idEscuderia);
+        if (posEscVieja != -1)
+        {
+            if (escuderias[posEscVieja].idPiloto1 == id)
+                escuderias[posEscVieja].idPiloto1 = -1;
+            else if (escuderias[posEscVieja].idPiloto2 == id)
+                escuderias[posEscVieja].idPiloto2 = -1;
+        }
+
+        // Asignar a nueva escudería
+        if (escuderias[posEscNueva].idPiloto1 == -1)
+            escuderias[posEscNueva].idPiloto1 = id;
+        else
+            escuderias[posEscNueva].idPiloto2 = id;
+
+        guardarEscuderias(escuderias, cantEscuderias);
     }
 
-    // Asignar a nueva escuderia
-    if (escuderias[posEscNueva].idPiloto1 == -1)
-        escuderias[posEscNueva].idPiloto1 = id;
-    else
-        escuderias[posEscNueva].idPiloto2 = id;
-
-    guardarEscuderias(escuderias, cantEscuderias);
     modificarPiloto(pilotos, cantPilotos, id, actualizado);
     return 1;
 }
@@ -223,28 +229,32 @@ int modificarPilotoCompleto(stPiloto pilotos[], int cantPilotos, stEscuderia esc
 // FUNCIONES ESCUDERIAS
 // ====================
 
-void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categoria)
+void listarEscuderiasDisponibles(stEscuderia escuderias[], int cant, int categoria, int idEscudActual)
 {
     printf("%-5s %-30s %-20s %-10s\n", "ID", "Marca", "Sponsor", "Lugares");
     printf("------------------------------------------------------------\n");
-
     for (int i = 0; i < cant; i++)
     {
         if (escuderias[i].categoria != categoria)
             continue;
 
+        int esSuEscuderia = (escuderias[i].id == idEscudActual);
         int lugares = 0;
         if (escuderias[i].idPiloto1 == -1) lugares++;
         if (escuderias[i].idPiloto2 == -1) lugares++;
 
         if (lugares > 0)
-        {
             printf("%-5d %-30s %-20s %-10d\n",
-                escuderias[i].id,
-                escuderias[i].marca,
-                escuderias[i].sponsor,
-                lugares);
-        }
+                   escuderias[i].id,
+                   escuderias[i].marca,
+                   escuderias[i].sponsor,
+                   lugares);
+        else if (esSuEscuderia)
+            printf("%-5d %-30s %-20s %-10s\n",
+                   escuderias[i].id,
+                   escuderias[i].marca,
+                   escuderias[i].sponsor,
+                   "actual");
     }
 }
 
@@ -289,11 +299,11 @@ void listarEscuderias(stEscuderia escuderias[], int cant, stPiloto pilotos[], in
         if (escuderias[i].idPiloto2 == -1) lugares++;
 
         printf("%-5d %-20s %-20s %-10s %-10d\n",
-            escuderias[i].id,
-            escuderias[i].marca,
-            escuderias[i].sponsor,
-            escuderias[i].categoria == 1 ? "F1" : "F2",
-            lugares);
+               escuderias[i].id,
+               escuderias[i].marca,
+               escuderias[i].sponsor,
+               escuderias[i].categoria == 1 ? "F1" : "F2",
+               lugares);
     }
 }
 
@@ -331,6 +341,7 @@ int registrarEscuderia(stEscuderia escuderias[], int *cant, stEscuderia nueva)
     return 1;
 }
 
+// Esta función no permite cambiar la categoría porque rompería la consistencia con los pilotos asignados.
 int modificarEscuderia(stEscuderia escuderias[], int cant, int id, stEscuderia actualizada, stPiloto pilotos[], int cantPilotos)
 {
     // Buscar la posición de la escudería

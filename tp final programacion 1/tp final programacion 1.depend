@@ -101,12 +101,12 @@
 	<string.h>
 	<stdio.h>
 
-1781656365 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\formula_pilotos.c
+1781682200 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\formula_pilotos.c
 	"formula_pilotos.h"
 	<stdio.h>
 	<string.h>
 
-1781501343 c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\formula_pilotos.h
+1781681575 c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\formula_pilotos.h
 	"formula.h"
 
 1781654561 c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\formula.h
@@ -120,7 +120,7 @@
 1781654561 c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\formula_pistas.h
 	"formula.h"
 
-1781655885 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\formula_carreras.c
+1781682433 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\formula_carreras.c
 	<stdio.h>
 	<string.h>
 	"formula.h"
@@ -132,7 +132,7 @@
 	"formula.h"
 	"formula_pistas.h"
 
-1781655885 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\main.c
+1781681751 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\main.c
 	<stdio.h>
 	<stdlib.h>
 	"formula_pilotos.h"

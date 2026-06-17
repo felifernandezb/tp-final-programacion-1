@@ -96,7 +96,7 @@ int main()
                         break;
                     }
 
-                    listarEscuderiasDisponibles(escuderias, cantEscuderias, nuevo.categoria);
+                    listarEscuderiasDisponibles(escuderias, cantEscuderias, nuevo.categoria, -1);
 
                     printf("Nombre: ");
                     scanString(nuevo.nombre, 50);
@@ -160,7 +160,9 @@ int main()
                     }
                     while (actualizado.categoria != 1 && actualizado.categoria != 2);
 
-                    listarEscuderiasDisponibles(escuderias, cantEscuderias, actualizado.categoria);
+                    int posPiloto = buscarPilotoPorId(pilotos, cantPilotos, id);
+                    listarEscuderiasDisponibles(escuderias, cantEscuderias, actualizado.categoria, pilotos[posPiloto].idEscuderia);
+
                     printf("ID nueva escuderia: ");
                     actualizado.idEscuderia = scanInt();
 
