@@ -13,7 +13,7 @@ int main()
     stEscuderia escuderias[MAX_ESCUDERIAS];
     //stPista     pistas[MAX_PISTAS];
     stCarrera   carreras[MAX_CARRERAS];
-    int cantPilotos = 0, cantEscuderias = 0, cantPistas = 0, cantCarreras = 0;
+    int cantPilotos = 0, cantEscuderias = 0, cantCarreras = 0;
 
     stColeccionPistas colPistas;
     if (!inicializarColeccion(&colPistas))
@@ -475,6 +475,22 @@ int main()
                     nueva.podio[2] = scanIdPiloto(pilotos, cantPilotos, "ID piloto 3er lugar: ");
 
                     nueva.vueltaRapida.idPiloto = scanIdPiloto(pilotos, cantPilotos, "ID piloto vuelta rapida: ");
+
+                    if (!mismaCategoria(pilotos, cantPilotos, nueva.podio[0], nueva.podio[1], nueva.podio[2], nueva.vueltaRapida.idPiloto))
+                    {
+                        printf("Los pilotos del podio deben ser de la misma categoria.\n");
+                        break;
+                    }
+
+                    if (hayChoqueFechasPiloto(carreras, cantCarreras, nueva.podio[0], nueva.fecha) ||
+                            hayChoqueFechasPiloto(carreras, cantCarreras, nueva.podio[1], nueva.fecha) ||
+                            hayChoqueFechasPiloto(carreras, cantCarreras, nueva.podio[2], nueva.fecha) ||
+                            hayChoqueFechasPiloto(carreras, cantCarreras, nueva.vueltaRapida.idPiloto, nueva.fecha))
+                    {
+                        printf("Un piloto ya tiene una carrera en esa fecha.\n");
+                        break;
+                    }
+
                     printf("Tiempo vuelta rapida (min seg ms): ");
                     scanf("%d %d %d", &nueva.vueltaRapida.minutos, /// Aplicamos scanf porque se nos hizo más práctico.
                           &nueva.vueltaRapida.segundos,

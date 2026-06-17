@@ -48,25 +48,6 @@ int registrarPiloto(stPiloto pilotos[], int *cant, stPiloto nuevo)
     return 1;
 }
 
-int modificarPiloto(stPiloto pilotos[], int cant, int id, stPiloto actualizado)
-{
-    // Buscar la posición del piloto
-    int pos = buscarPilotoPorId(pilotos, cant, id);
-
-    // Si no existe, devolver 0
-    if (pos == -1)
-        return 0;
-
-    // Conservar el ID original y reemplazar el resto
-    actualizado.id = id;
-    pilotos[pos] = actualizado;
-
-    // Persistir cambios en el archivo
-    guardarPilotos(pilotos, cant);
-
-    return 1;
-}
-
 int eliminarPiloto(stPiloto pilotos[], int *cant, int id)
 {
     // Buscar la posición del piloto

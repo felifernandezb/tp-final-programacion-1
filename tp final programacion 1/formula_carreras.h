@@ -18,7 +18,9 @@ void listarCarreras(stCarrera carrera[], int cant, stColeccionPistas *col, stPil
 void listarCarrerasDePista(stCarrera carrera[], int cant, stColeccionPistas *col , int idPista, stPiloto pilotos[], int cantPilotos);
 void listarCarrerasDePiloto(stCarrera carrera[], int cant, stColeccionPistas *col, int idPiloto, stPiloto pilotos[], int cantPilotos);
 int hayChoqueFechas(stCarrera carrera[], int cant, int idPista, stFecha fecha);
+int hayChoqueFechasPiloto(stCarrera carrera[], int cant, int idPiloto, stFecha fecha);
 int eliminarCarrera(stCarrera carrera[], int *cant, int id);
 int modificarCarrera(stCarrera carrera[], int *cant, int id, stCarrera nueva);
+int mismaCategoria(stPiloto pilotos[], int cantPilotos, int idPiloto1, int idPiloto2, int idPiloto3, int idPilotoVR);
 
 #endif // FORMULA_CARRERAS_H_INCLUDED

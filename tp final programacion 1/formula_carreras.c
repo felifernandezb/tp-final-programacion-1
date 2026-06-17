@@ -229,14 +229,27 @@ int hayChoqueFechas(stCarrera carrera[], int cant, int idPista, stFecha fecha)
                 carrera[i].fecha.dia == fecha.dia &&
                 carrera[i].fecha.mes == fecha.mes &&
                 carrera[i].fecha.anio == fecha.anio)
-        {
             return 1;
-        }
-
     }
-
     return 0;
+}
 
+int hayChoqueFechasPiloto(stCarrera carrera[], int cant, int idPiloto, stFecha fecha)
+{
+    for (int i = 0; i < cant; i++)
+    {
+        if (carrera[i].fecha.dia == fecha.dia &&
+            carrera[i].fecha.mes == fecha.mes &&
+            carrera[i].fecha.anio == fecha.anio)
+        {
+            if (carrera[i].podio[0] == idPiloto ||
+                carrera[i].podio[1] == idPiloto ||
+                carrera[i].podio[2] == idPiloto ||
+                carrera[i].vueltaRapida.idPiloto == idPiloto)
+                return 1;
+        }
+    }
+    return 0;
 }
 
 int eliminarCarrera(stCarrera carrera[], int *cant, int id)
@@ -266,4 +279,19 @@ int modificarCarrera(stCarrera carrera[], int *cant, int id, stCarrera nueva)
     guardarCarreras(carrera, *cant);
 
     return 1;
+}
+
+int mismaCategoria(stPiloto pilotos[], int cantPilotos, int idPiloto1, int idPiloto2, int idPiloto3, int idPilotoVR)
+{
+    int pos1 = buscarPilotoPorId(pilotos, cantPilotos, idPiloto1);
+    int pos2 = buscarPilotoPorId(pilotos, cantPilotos, idPiloto2);
+    int pos3 = buscarPilotoPorId(pilotos, cantPilotos, idPiloto3);
+    int posVR = buscarPilotoPorId(pilotos, cantPilotos, idPilotoVR);
+
+    if (pos1 == -1 || pos2 == -1 || pos3 == -1 || posVR == -1)
+        return 0;
+
+    return (pilotos[pos1].categoria == pilotos[pos2].categoria &&
+            pilotos[pos1].categoria == pilotos[pos3].categoria &&
+            pilotos[pos1].categoria == pilotos[posVR].categoria);
 }
