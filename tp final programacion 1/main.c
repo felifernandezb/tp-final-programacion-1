@@ -548,9 +548,7 @@ int main()
                     }
 
                     printf("Tiempo vuelta rapida (min seg ms): ");
-                    scanf("%d %d %d", &nueva.vueltaRapida.minutos, /// Aplicamos scanf porque se nos hizo más práctico.
-                          &nueva.vueltaRapida.segundos,
-                          &nueva.vueltaRapida.milisegundos);
+                    scanVueltaRapida(&nueva.vueltaRapida);
 
                     int pos1 = buscarPilotoPorId(pilotos, cantPilotos, nueva.podio[0]);
                     int pos2 = buscarPilotoPorId(pilotos, cantPilotos, nueva.podio[1]);
@@ -610,9 +608,7 @@ int main()
                     printf("ID piloto vuelta rapida: ");
                     nueva.vueltaRapida.idPiloto = scanInt();
                     printf("Tiempo vuelta rapida (min seg ms): ");
-                    scanf("%d %d %d", &nueva.vueltaRapida.minutos, /// Aplicamos scanf porque se nos hizo más práctico.
-                          &nueva.vueltaRapida.segundos,
-                          &nueva.vueltaRapida.milisegundos);
+                    scanVueltaRapida(&nueva.vueltaRapida);
 
                     if (modificarCarrera(carreras, &cantCarreras, id, nueva))
                         printf("Carrera modificada correctamente.\n");

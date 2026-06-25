@@ -133,7 +133,7 @@
 	"formula.h"
 	"formula_pistas.h"
 
-1782369134 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\main.c
+1782370049 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\main.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -154,7 +154,7 @@
 	<string.h>
 	<stdio.h>
 
-1781654743 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\scanner.c
+1782370049 source:c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\scanner.c
 	"scanner.h"
 	<stdio.h>
 	<stdlib.h>
@@ -163,7 +163,7 @@
 	"formula_pilotos.h"
 	"formula_pistas.h"
 
-1781654561 c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\scanner.h
+1782369915 c:\users\juan\documents\1 tp final\tp-final-programacion-1\tp final programacion 1\scanner.h
 	"formula.h"
 
 1781651564 source:c:\users\felip\onedrive\documentos\github\tp-final-programacion-1\tp final programacion 1\scanner.c

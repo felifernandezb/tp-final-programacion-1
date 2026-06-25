@@ -12,5 +12,6 @@ int scanString(char* string, int maxLength);
 void scanFecha(stFecha *fecha);
 int scanIdPiloto(stPiloto pilotos[], int cantPilotos, char* mensaje);
 int scanIdPista(stColeccionPistas *col);
+void scanVueltaRapida(stVueltaRapida *vueltaRapida);
 
 #endif // SCANNER_H_INCLUDED

@@ -154,3 +154,24 @@ int scanIdPista(stColeccionPistas *col)
 
     return id;
 }
+
+void scanVueltaRapida(stVueltaRapida *vueltaRapida)
+{
+    char buffer[30];
+    fgets(buffer, 30, stdin);
+    if (sscanf(buffer, "%d %d %d", &vueltaRapida->minutos, &vueltaRapida->segundos, &vueltaRapida->milisegundos) != 3)
+    {
+        printf("Formato invalido. Ingrese minutos, segundos y milisegundos separados por espacios.\n");
+        scanVueltaRapida(vueltaRapida);
+        return;
+    }
+
+    if (vueltaRapida->minutos < 0 || vueltaRapida->minutos > 60 ||
+        vueltaRapida->segundos < 0 || vueltaRapida->segundos > 60 ||
+        vueltaRapida->milisegundos < 0 || vueltaRapida->milisegundos > 999)
+    {
+        printf("Tiempo invalido. Los minutos y segundos deben estar entre 0-60, milisegundos 0-999.\n");
+        scanVueltaRapida(vueltaRapida);
+        return;
+    }
+}
