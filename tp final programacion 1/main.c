@@ -100,7 +100,10 @@ int main()
                     listarEscuderiasDisponibles(escuderias, cantEscuderias, nuevo.categoria, -1);
 
                     printf("Nombre: ");
-                    scanString(nuevo.nombre, 50);
+                    while(scanString(nuevo.nombre, 50) == 0)
+                    {
+                        printf("El nombre no puede estar vacio. Nombre: ");
+                    }
 
                     printf("ID Escuderia: ");
                     nuevo.idEscuderia = scanInt();
@@ -150,7 +153,10 @@ int main()
                         actualizado.puntaje = pilotos[buscarPilotoPorId(pilotos, cantPilotos, id)].puntaje;
 
                         printf("Nuevo nombre: ");
-                        scanString(actualizado.nombre, 50);
+                        while(scanString(actualizado.nombre, 50) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Nombre: ");
+                        }
                         actualizado.nombre[0] = toupper(actualizado.nombre[0]);
 
                     do
@@ -264,9 +270,15 @@ int main()
                     nueva.idPiloto2 = -1;
 
                     printf("Marca: ");
-                    scanString(nueva.marca, 50);
+                    while(scanString(nueva.marca, 50) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Marca: ");
+                        }
                     printf("Sponsor: ");
-                    scanString(nueva.sponsor, 50);
+                    while(scanString(nueva.sponsor, 50) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Sponsor: ");
+                        }
                     do
                     {
                         printf("Categoria: (1=F1, 2=F2): ");
@@ -295,9 +307,15 @@ int main()
 
                     stEscuderia actualizada;
                     printf("Nueva marca: ");
-                    scanString(actualizada.marca, 50);
+                    while(scanString(actualizada.marca, 50) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Nueva marca: ");
+                        }
                     printf("Nuevo sponsor: ");
-                    scanString(actualizada.sponsor, 50);
+                    while(scanString(actualizada.sponsor, 50) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Nuevo Sponsor: ");
+                        }
 
                     if (modificarEscuderia(escuderias, cantEscuderias, id, actualizada, pilotos, cantPilotos))
                         printf("Escuderia modificada correctamente.\n");
@@ -371,9 +389,15 @@ int main()
                     stPista nueva;
                     nueva.id = generarIDPista(&colPistas);
                     printf("Nombre: ");
-                    scanString(nueva.nombre, 50);
+                    while(scanString(nueva.nombre, 50) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Nombre: ");
+                        }
                     printf("Ubicacion: ");
-                    scanString(nueva.ubicacion, 100);
+                    while(scanString(nueva.ubicacion, 100) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Ubicacion: ");
+                        }
                     do
                     {
                         printf("Distancia (km): ");
@@ -398,9 +422,16 @@ int main()
                     id = scanInt();
                     stPista actualizada;
                     printf("Nuevo nombre: ");
-                    scanString(actualizada.nombre, 50);
+                    while(scanString(actualizada.nombre, 50) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Nombre: ");
+                        }
                     printf("Nueva ubicacion: ");
-                    scanString(actualizada.ubicacion, 100);
+                    while(scanString(actualizada.ubicacion, 100) == 0)
+                        {
+                            printf("El nombre no puede estar vacio. Ubicacion: ");
+                        }
+
                     do
                     {
                         printf("Nueva distancia (km): ");
